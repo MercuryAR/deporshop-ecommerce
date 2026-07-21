@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title description">
+  <title id="title">Imagen de producto no disponible</title>
+  <desc id="description">Marcador visual para productos sin imagen</desc>
+  <rect width="400" height="400" fill="#f3f4f6"/>
+  <path d="M118 249c23-5 43-19 58-42l25-39 27 34c15 19 34 32 57 38l29 8c8 2 13 9 13 17v14c0 16-13 29-29 29H118c-25 0-45-20-45-45 0-7 5-12 12-13l33-1Z" fill="#d1d5db"/>
+  <path d="M119 249c28 10 62 15 101 15 38 0 73-5 104-14" fill="none" stroke="#9ca3af" stroke-width="10" stroke-linecap="round"/>
+  <text x="200" y="346" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#6b7280">Imagen no disponible</text>
+</svg>

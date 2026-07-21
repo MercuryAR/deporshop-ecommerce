@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <img src="./img/brand-mark.svg" alt="" class="logo-icon">
+                </div>
+                <div class="header__nombre">DeporShop</div>
+            </div>
+            <nav class="header__nav" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="productos.html" class="nav-link">Productos</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+            <div class="header__actions">
+                <a href="productos.html" class="icon-button" aria-label="Buscar productos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </a>
+                <a href="usuario.html" class="icon-button" aria-label="Usuario">
+                    <img src="./img/Usuario.svg" alt="">
+                </a>
+                <a href="carrito.html" class="icon-button cart-button" aria-label="Carrito de compras">
+                    <img src="./img/Carrito.png" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="checkout-page">
+        <section class="checkout" aria-labelledby="checkoutTitle">
+            <div class="container">
+                <header class="checkout__header">
+                    <p class="checkout__eyebrow">Último paso</p>
+                    <h2 id="checkoutTitle">Finalizar compra</h2>
+                    <p class="checkout__intro">Completa tus datos y revisa el pedido antes de confirmar.</p>
+                    <p id="checkoutAutofill" class="checkout__autofill" role="status" hidden>
+                        Usamos los datos guardados en tu perfil. Puedes modificarlos antes de confirmar.
+                    </p>
+                </header>
+
+                <div class="checkout__layout">
+                    <form id="checkoutForm" class="checkout-form">
+                        <fieldset class="checkout-form__section">
+                            <legend>Datos de contacto</legend>
+                            <div class="checkout-form__grid">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input class="form-input" type="text" name="nombre" id="nombre"
+                                        autocomplete="given-name" placeholder="Tu nombre" required minlength="2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido">Apellido</label>
+                                    <input class="form-input" type="text" name="apellido" id="apellido"
+                                        autocomplete="family-name" placeholder="Tu apellido" required minlength="2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="movil">Móvil</label>
+                                    <input class="form-input" type="tel" name="movil" id="movil"
+                                        autocomplete="tel" inputmode="tel" placeholder="11 1234 5678" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo">Correo electrónico</label>
+                                    <input class="form-input" type="email" name="correo" id="correo"
+                                        autocomplete="email" placeholder="tu@email.com" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="checkout-form__section">
+                            <legend>Entrega</legend>
+                            <div class="checkout-form__grid">
+                                <div class="form-group form-group--wide">
+                                    <label for="direccion">Dirección</label>
+                                    <input class="form-input" type="text" name="direccion" id="direccion"
+                                        autocomplete="street-address" placeholder="Calle y número" required minlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ciudad">Ciudad</label>
+                                    <input class="form-input" type="text" name="ciudad" id="ciudad"
+                                        autocomplete="address-level2" placeholder="Buenos Aires" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="codigoPostal">Código postal</label>
+                                    <input class="form-input" type="text" name="codigoPostal" id="codigoPostal"
+                                        autocomplete="postal-code" inputmode="numeric" placeholder="C1000" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="checkout-form__section">
+                            <legend>Método de pago</legend>
+                            <div class="form-group">
+                                <label for="metodoPago">Selecciona una opción</label>
+                                <select class="form-select" name="metodoPago" id="metodoPago" required>
+                                    <option value="">Elegir método</option>
+                                    <option value="tarjeta">Tarjeta al recibir</option>
+                                    <option value="transferencia">Transferencia bancaria</option>
+                                    <option value="efectivo">Efectivo contra entrega</option>
+                                </select>
+                            </div>
+                            <p class="checkout-form__note">Entorno de demostración: no se solicitan ni transmiten datos bancarios.</p>
+                        </fieldset>
+
+                        <div id="checkoutError" class="checkout-message checkout-message--error" role="alert" hidden></div>
+                        <button id="confirmPurchase" class="btn btn-primary checkout-form__submit" type="submit">
+                            Confirmar pedido
+                        </button>
+                    </form>
+
+                    <aside class="checkout-summary" aria-labelledby="summaryTitle">
+                        <h3 id="summaryTitle">Resumen del pedido</h3>
+                        <div id="checkoutItems" class="checkout-summary__items" aria-live="polite">
+                            <p>Cargando carrito…</p>
+                        </div>
+                        <div class="checkout-summary__row">
+                            <span>Envío</span>
+                            <strong>Gratis</strong>
+                        </div>
+                        <div class="checkout-summary__total">
+                            <span>Total</span>
+                            <strong id="checkoutTotal">$ 0,00</strong>
+                        </div>
+                        <a href="carrito.html" class="checkout-summary__back">← Volver al carrito</a>
+                    </aside>
+                </div>
+
+                <section id="purchaseSuccess" class="checkout-success" aria-live="polite" tabindex="-1" hidden>
+                    <div class="checkout-success__icon" aria-hidden="true">✓</div>
+                    <h2>Pedido confirmado</h2>
+                    <p id="purchaseSuccessMessage"></p>
+                    <a href="productos.html" class="btn btn-primary">Seguir comprando</a>
+                </section>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p><strong>&copy; 2024 Todos los derechos reservados. DeporShop, Buenos Aires, Argentina.</strong></p>
+        <nav class="footer-links">
+            <a href="#">Política de Privacidad</a> |
+            <a href="#">Términos y Condiciones</a>
+        </nav>
+    </footer>
+    <script src="js/api.js?v=2"></script>
+    <script src="js/compra.js?v=5"></script>
+</body>
+</html>

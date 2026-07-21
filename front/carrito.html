@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carrito de Compras - DeporShop">
+    <title>Carrito de Compras - DeporShop</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <img src="./img/brand-mark.svg" alt="" class="logo-icon">
+                </div>
+                <h1 class="header__nombre">DeporShop</h1>
+            </div>
+
+            <nav class="header__nav" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="productos.html" class="nav-link">Productos</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+
+            <div class="header__actions">
+                <button class="icon-button" aria-label="Buscar" onclick="toggleSearch()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                </button>
+                <a href="usuario.html" class="icon-button" aria-label="Usuario">
+                    <img src="./img/Usuario.svg" alt="">
+                </a>
+                <a href="carrito.html" class="icon-button cart-button" aria-label="Carrito de compras">
+                    <img src="./img/Carrito.png" alt="">
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+
+            <div class="header__social">
+                <a href="javascript:void(0)" aria-label="Facebook" class="social-link">
+                    <img src="./img/Facebook.svg" alt="">
+                </a>
+                <a href="javascript:void(0)" aria-label="Instagram" class="social-link">
+                    <img src="./img/Instagram.svg" alt="">
+                </a>
+                <a href="javascript:void(0)" aria-label="Twitter" class="social-link">
+                    <img src="./img/X.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Ruta de navegación" style="padding: var(--space-lg) 0; background: var(--color-bg-secondary);">
+            <div class="container" style="display: flex; gap: var(--space-sm); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                <a href="index.html" style="color: var(--color-primary);">Inicio</a>
+                <span>/</span>
+                <span>Carrito</span>
+            </div>
+        </nav>
+
+        <!-- Carrito -->
+        <section style="padding: var(--space-3xl) 0;">
+            <div class="container">
+                <h2 style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-2xl);">Mi Carrito</h2>
+
+                <div style="display: grid; grid-template-columns: 1fr 350px; gap: var(--space-3xl);">
+                    <!-- Lista de productos -->
+                    <div>
+                        <div id="carritoVacio" style="text-align: center; padding: 60px 20px;">
+                            <svg viewBox="0 0 100 100" style="width: 80px; height: 80px; opacity: 0.3; margin-bottom: var(--space-lg);">
+                                <path d="M 20 20 L 25 60 Q 25 75 35 75 L 65 75 Q 75 75 75 60 L 80 20 Z" fill="currentColor" />
+                            </svg>
+                            <p style="font-size: var(--font-size-lg); color: var(--color-text-secondary); margin-bottom: var(--space-lg);">
+                                Tu carrito está vacío
+                            </p>
+                            <a href="productos.html" class="btn btn-primary">Continuar comprando</a>
+                        </div>
+
+                        <div id="carritoLleno" style="display: none;">
+                            <div id="cartItems"></div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen del carrito -->
+                    <aside style="background: var(--color-bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg); height: fit-content;">
+                        <h3 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin-bottom: var(--space-lg);">Resumen</h3>
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-md);">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-md);">
+                            <span>Envío:</span>
+                            <span id="envio">Gratis</span>
+                        </div>
+
+                        <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-md); margin-bottom: var(--space-lg);">
+                            <div style="display: flex; justify-content: space-between; font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-accent);">
+                                <span>Total:</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                        </div>
+
+                        <button id="btnProceder" class="btn btn-accent btn-full" style="margin-bottom: var(--space-md);">
+                            Proceder a Pagar
+                        </button>
+
+                        <button id="btnContinuar" class="btn btn-secondary btn-full">
+                            Continuar Comprando
+                        </button>
+
+                        <button id="btnLimpiar" class="btn btn-ghost btn-full" style="margin-top: var(--space-md); color: var(--color-error);">
+                            Vaciar Carrito
+                        </button>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">DeporShop</h3>
+                    <p class="footer__text">Tu tienda de confianza en Buenos Aires, Argentina</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 DeporShop. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay" aria-hidden="true">
+        <div class="search-container">
+            <button id="closeSearch" class="close-search" aria-label="Cerrar búsqueda">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off">
+                <button type="submit" class="search-submit" aria-label="Buscar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/carrito-compra.js?v=2"></script>
+</body>
+
+</html>

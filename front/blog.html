@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog de DeporShop - Consejos, novedades y tendencias del mundo del deporte y las zapatillas deportivas.">
+    <meta name="keywords" content="blog, deportes, zapatillas, consejos, tendencias, DeporShop">
+    <meta name="author" content="DeporShop">
+    <title>Blog - DeporShop</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <img src="./img/brand-mark.svg" alt="" class="logo-icon">
+                </div>
+                <h1 class="header__nombre">DeporShop</h1>
+            </div>
+            
+            <nav class="header__nav" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="productos.html" class="nav-link">Productos</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+
+            <div class="header__actions">
+                <a href="productos.html" class="icon-button" aria-label="Buscar productos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </a>
+                <a href="usuario.html" class="icon-button" aria-label="Usuario">
+                    <img src="./img/Usuario.svg" alt="">
+                </a>
+                <a href="carrito.html" class="icon-button cart-button" aria-label="Carrito de compras">
+                    <img src="./img/Carrito.png" alt="">
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+
+            <div class="header__social">
+                <a href="#" aria-label="Facebook" class="social-link">
+                    <img src="./img/Facebook.svg" alt="">
+                </a>
+                <a href="#" aria-label="Instagram" class="social-link">
+                    <img src="./img/Instagram.svg" alt="">
+                </a>
+                <a href="#" aria-label="Twitter" class="social-link">
+                    <img src="./img/X.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="products-hero">
+            <div class="container">
+                <h1 class="products-hero__title">Blog DeporShop</h1>
+                <p class="products-hero__subtitle">Consejos, novedades y tendencias del mundo deportivo</p>
+            </div>
+        </section>
+
+        <!-- Blog Grid Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="products-grid">
+                    <!-- Artículo 1 -->
+                    <article class="product-card">
+                        <div class="product-card__badge product-card__badge--new">Nuevo</div>
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre1.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Guías de Compra</span>
+                            <h3 class="product-card__title">Cómo elegir las zapatillas perfectas para running</h3>
+                            <p class="product-card__description">
+                                Descubre los factores clave que debes considerar al elegir tus zapatillas de running: tipo de pisada, superficie y distancia.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">15 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 2 -->
+                    <article class="product-card">
+                        <div class="product-card__badge product-card__badge--popular">Popular</div>
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre2.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Tendencias</span>
+                            <h3 class="product-card__title">Las tendencias en zapatillas deportivas 2024</h3>
+                            <p class="product-card__description">
+                                Conoce los diseños, tecnologías y colores que están marcando tendencia este año en el mundo del calzado deportivo.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">12 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 3 -->
+                    <article class="product-card">
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre3.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Cuidado</span>
+                            <h3 class="product-card__title">5 tips para mantener tus zapatillas como nuevas</h3>
+                            <p class="product-card__description">
+                                Aprende las mejores técnicas para limpiar y mantener tus zapatillas deportivas, prolongando su vida útil y apariencia.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">10 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 4 -->
+                    <article class="product-card">
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre4.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Entrenamiento</span>
+                            <h3 class="product-card__title">Zapatillas específicas para cada deporte</h3>
+                            <p class="product-card__description">
+                                ¿Por qué es importante usar zapatillas específicas? Descubre las diferencias entre running, training, basketball y más.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">8 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 5 -->
+                    <article class="product-card">
+                        <div class="product-card__badge product-card__badge--sale">Destacado</div>
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre5.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Tecnología</span>
+                            <h3 class="product-card__title">Las tecnologías más innovadoras en zapatillas</h3>
+                            <p class="product-card__description">
+                                Boost, Air Max, React, Gel... Conoce las tecnologías que revolucionaron el mundo del calzado deportivo.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">5 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 6 -->
+                    <article class="product-card">
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre6.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Estilo</span>
+                            <h3 class="product-card__title">Cómo combinar zapatillas deportivas con tu outfit</h3>
+                            <p class="product-card__description">
+                                Las zapatillas deportivas son versátiles. Aprende a combinarlas para looks casuales, deportivos y hasta formales.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">3 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 7 -->
+                    <article class="product-card">
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre7.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Salud</span>
+                            <h3 class="product-card__title">La importancia del calzado adecuado para tu salud</h3>
+                            <p class="product-card__description">
+                                Un buen calzado deportivo previene lesiones y mejora tu rendimiento. Conoce los beneficios de elegir bien.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">1 Nov 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Artículo 8 -->
+                    <article class="product-card">
+                        <div class="product-card__badge product-card__badge--new">Nuevo</div>
+                        <div class="product-card__image">
+                            <img src="img/zapatillahombre8.jpeg" alt="Artículo de blog">
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__category">Historia</span>
+                            <h3 class="product-card__title">La evolución de las zapatillas deportivas</h3>
+                            <p class="product-card__description">
+                                Desde los primeros modelos hasta las zapatillas inteligentes. Un recorrido por la historia del calzado deportivo.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">29 Oct 2024</span>
+                                <button class="btn btn--secondary">Leer más</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination__button pagination__button--prev" disabled>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                        Anterior
+                    </button>
+                    
+                    <div class="pagination__numbers">
+                        <button class="pagination__number pagination__number--active">1</button>
+                        <button class="pagination__number">2</button>
+                        <button class="pagination__number">3</button>
+                    </div>
+                    
+                    <button class="pagination__button pagination__button--next">
+                        Siguiente
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter CTA -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-social">
+                    <h3 class="contact-social__title">Suscríbete a nuestro newsletter</h3>
+                    <p>Recibe las últimas noticias, consejos y ofertas directamente en tu email</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit" class="btn btn--primary">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">DeporShop</h3>
+                    <p class="footer__text">Tu tienda de confianza en Buenos Aires, Argentina</p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Facebook" class="social-link">
+                            <img src="./img/Facebook.svg" alt="">
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <img src="./img/Instagram.svg" alt="">
+                        </a>
+                        <a href="#" aria-label="Twitter" class="social-link">
+                            <img src="./img/X.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Enlaces Rápidos</h4>
+                    <nav class="footer__links">
+                        <a href="sobrenosotros.html">Sobre Nosotros</a>
+                        <a href="productos.html">Productos</a>
+                        <a href="contacto.html">Contacto</a>
+                        <a href="blog.html">Blog</a>
+                    </nav>
+                </div>
+
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Ayuda</h4>
+                    <nav class="footer__links">
+                        <a href="#">Preguntas Frecuentes</a>
+                        <a href="#">Envíos</a>
+                        <a href="#">Devoluciones</a>
+                        <a href="#">Términos y Condiciones</a>
+                    </nav>
+                </div>
+
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Newsletter</h4>
+                    <p class="footer__text">Recibe nuestras ofertas</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit">Suscribir</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2024 DeporShop. Todos los derechos reservados. Buenos Aires, Argentina.</p>
+                <nav class="footer__legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Uso</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Preguntas Frecuentes - Resuelve tus dudas sobre compras, envíos y productos en DeporShop.">
+    <meta name="keywords" content="FAQ, preguntas frecuentes, ayuda, DeporShop">
+    <meta name="author" content="DeporShop">
+    <title>Preguntas Frecuentes - DeporShop</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <img src="./img/brand-mark.svg" alt="" class="logo-icon">
+                </div>
+                <h1 class="header__nombre">DeporShop</h1>
+            </div>
+            
+            <nav class="header__nav" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="productos.html" class="nav-link">Productos</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+
+            <div class="header__actions">
+                <a href="productos.html" class="icon-button" aria-label="Buscar productos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </a>
+                <a href="usuario.html" class="icon-button" aria-label="Usuario">
+                    <img src="./img/Usuario.svg" alt="">
+                </a>
+                <a href="carrito.html" class="icon-button cart-button" aria-label="Carrito de compras">
+                    <img src="./img/Carrito.png" alt="">
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+
+            <div class="header__social">
+                <a href="#" aria-label="Facebook" class="social-link">
+                    <img src="./img/Facebook.svg" alt="">
+                </a>
+                <a href="#" aria-label="Instagram" class="social-link">
+                    <img src="./img/Instagram.svg" alt="">
+                </a>
+                <a href="#" aria-label="Twitter" class="social-link">
+                    <img src="./img/X.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="container">
+                <h2 class="contact-hero__title">Preguntas Frecuentes</h2>
+                <p class="contact-hero__subtitle">Encuentra respuestas a las dudas más comunes</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="faq-grid">
+                    <!-- Compras y Pagos -->
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cómo puedo realizar una compra?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Realizar una compra en DeporShop es muy sencillo:</p>
+                            <ol>
+                                <li>Navega por nuestro catálogo y selecciona los productos que desees</li>
+                                <li>Haz clic en "Agregar al Carrito"</li>
+                                <li>Cuando termines, ve al carrito y haz clic en "Finalizar Compra"</li>
+                                <li>Completa tus datos de envío y pago</li>
+                                <li>Confirma tu pedido y recibirás un email de confirmación</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Qué métodos de pago aceptan?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Aceptamos múltiples formas de pago:</p>
+                            <ul>
+                                <li>Tarjetas de crédito: Visa, Mastercard, American Express (hasta 12 cuotas sin interés)</li>
+                                <li>Tarjetas de débito</li>
+                                <li>Mercado Pago</li>
+                                <li>Transferencia bancaria</li>
+                                <li>Efectivo en nuestra sucursal</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Es seguro comprar en DeporShop?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>¡Absolutamente! Tu seguridad es nuestra prioridad:</p>
+                            <ul>
+                                <li>Certificado SSL para proteger tus datos</li>
+                                <li>No almacenamos información de tarjetas de crédito</li>
+                                <li>Procesadores de pago certificados</li>
+                                <li>Cumplimos con la Ley de Protección de Datos Personales</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Puedo modificar o cancelar mi pedido?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Puedes modificar o cancelar tu pedido siempre que no haya sido despachado. Contáctanos inmediatamente a través de:</p>
+                            <ul>
+                                <li>WhatsApp: +54 11 1234-5678</li>
+                                <li>Email: pedidos@deporshop.com</li>
+                                <li>Teléfono: +54 11 1234-5678</li>
+                            </ul>
+                            <p>Una vez despachado, puedes hacer uso de nuestra política de devoluciones.</p>
+                        </div>
+                    </details>
+
+                    <!-- Productos -->
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Los productos son originales?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Sí, garantizamos que todos nuestros productos son 100% originales. Trabajamos directamente con distribuidores oficiales de Nike, Adidas, Puma, New Balance y todas las marcas que ofrecemos. Cada producto incluye:</p>
+                            <ul>
+                                <li>Garantía oficial de la marca</li>
+                                <li>Etiquetas y packaging originales</li>
+                                <li>Factura de compra</li>
+                                <li>Certificado de autenticidad cuando aplique</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cómo sé mi talle correcto?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Cada producto tiene una guía de talles específica. Recomendaciones:</p>
+                            <ul>
+                                <li>Consulta la tabla de talles en la página de cada producto</li>
+                                <li>Mide tu pie en centímetros y compáralo con nuestra guía</li>
+                                <li>Ten en cuenta que algunos modelos pueden calzar más grande o pequeño</li>
+                                <li>Si tienes dudas, contáctanos por WhatsApp para asesoramiento personalizado</li>
+                            </ul>
+                            <p>Si el talle no te queda bien, puedes realizar un cambio sin costo adicional.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Tienen stock de todos los productos?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Nuestro stock se actualiza en tiempo real. Si un producto aparece en la web, tenemos stock disponible. En caso de que te interese un producto agotado:</p>
+                            <ul>
+                                <li>Puedes activar notificaciones para cuando vuelva a estar disponible</li>
+                                <li>Contáctanos para consultar fecha estimada de reposición</li>
+                                <li>Te podemos recomendar alternativas similares</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- Envíos -->
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cuánto demora el envío?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Los tiempos de entrega son:</p>
+                            <ul>
+                                <li><strong>CABA:</strong> 24-48 horas hábiles</li>
+                                <li><strong>GBA:</strong> 2-3 días hábiles</li>
+                                <li><strong>Interior (Buenos Aires):</strong> 3-5 días hábiles</li>
+                                <li><strong>Resto del país:</strong> 5-7 días hábiles</li>
+                            </ul>
+                            <p>Recibirás un código de seguimiento por email para rastrear tu pedido en tiempo real.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿El envío tiene costo?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p><strong>¡Envío GRATIS en compras superiores a $50,000!</strong></p>
+                            <p>Para compras menores, el costo varía según la zona:</p>
+                            <ul>
+                                <li>CABA: $3,500</li>
+                                <li>GBA: $4,500</li>
+                                <li>Interior: $5,500 - $8,500 (según provincia)</li>
+                            </ul>
+                            <p>El costo exacto se calcula al ingresar tu código postal en el checkout.</p>
+                        </div>
+                    </details>
+
+                    <!-- Cambios y Devoluciones -->
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Puedo devolver o cambiar un producto?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Sí, tienes 30 días corridos desde que recibiste el producto para realizar cambios o devoluciones.</p>
+                            <p><strong>Condiciones:</strong></p>
+                            <ul>
+                                <li>Producto sin usar, con etiquetas originales</li>
+                                <li>En su empaque original</li>
+                                <li>Con la factura de compra</li>
+                            </ul>
+                            <p>Los cambios por talle o color no tienen costo adicional. Para devoluciones, el costo de envío corre por cuenta del cliente.</p>
+                            <p><a href="devoluciones.html" class="form-link">Ver política completa de devoluciones →</a></p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cómo solicito un cambio?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Para solicitar un cambio:</p>
+                            <ol>
+                                <li>Contáctanos por email a: cambios@deporshop.com</li>
+                                <li>Indica tu número de pedido y el motivo del cambio</li>
+                                <li>Te enviaremos una etiqueta de devolución</li>
+                                <li>Despacha el producto en cualquier correo</li>
+                                <li>Recibirás tu nuevo producto en 5-7 días hábiles</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <!-- Cuenta y Soporte -->
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Necesito crear una cuenta para comprar?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>No es obligatorio, pero crear una cuenta tiene beneficios:</p>
+                            <ul>
+                                <li>Proceso de compra más rápido</li>
+                                <li>Historial de pedidos</li>
+                                <li>Seguimiento de envíos</li>
+                                <li>Ofertas exclusivas</li>
+                                <li>Lista de favoritos</li>
+                                <li>Notificaciones de reposición de stock</li>
+                            </ul>
+                            <p>Puedes comprar como invitado si lo prefieres.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            ¿Cómo contacto al servicio de atención al cliente?
+                            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Estamos disponibles para ayudarte:</p>
+                            <ul>
+                                <li><strong>WhatsApp:</strong> +54 11 1234-5678 (Lun-Vie 9-20hs, Sáb 9-14hs)</li>
+                                <li><strong>Email:</strong> info@deporshop.com (respondemos en 24hs)</li>
+                                <li><strong>Teléfono:</strong> +54 11 1234-5678</li>
+                                <li><strong>Formulario:</strong> <a href="contacto.html" class="form-link">Ir a Contacto</a></li>
+                                <li><strong>Sucursal:</strong> Av. Corrientes 1234, CABA (Lun-Vie 9-18hs, Sáb 9-14hs)</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="contact-social">
+                    <h3 class="contact-social__title">¿No encontraste lo que buscabas?</h3>
+                    <p>Nuestro equipo está listo para ayudarte</p>
+                    <a href="contacto.html" class="btn btn--primary btn--large">Contactar Soporte</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">DeporShop</h3>
+                    <p class="footer__text">Tu tienda de confianza en Buenos Aires, Argentina</p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Facebook" class="social-link">
+                            <img src="./img/Facebook.svg" alt="">
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <img src="./img/Instagram.svg" alt="">
+                        </a>
+                        <a href="#" aria-label="Twitter" class="social-link">
+                            <img src="./img/X.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Enlaces Rápidos</h4>
+                    <nav class="footer__links">
+                        <a href="sobrenosotros.html">Sobre Nosotros</a>
+                        <a href="productos.html">Productos</a>
+                        <a href="contacto.html">Contacto</a>
+                        <a href="blog.html">Blog</a>
+                    </nav>
+                </div>
+
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Ayuda</h4>
+                    <nav class="footer__links">
+                        <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a>
+                        <a href="envios.html">Envíos</a>
+                        <a href="devoluciones.html">Devoluciones</a>
+                        <a href="terminosdeuso.html">Términos y Condiciones</a>
+                    </nav>
+                </div>
+
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Newsletter</h4>
+                    <p class="footer__text">Recibe nuestras ofertas</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit">Suscribir</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2024 DeporShop. Todos los derechos reservados. Buenos Aires, Argentina.</p>
+                <nav class="footer__legal">
+                    <a href="politicadeprivacidad.html">Política de Privacidad</a>
+                    <a href="terminosdeuso.html">Términos de Uso</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+</body>
+</html>

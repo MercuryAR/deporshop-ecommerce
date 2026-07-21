@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mi Cuenta - DeporShop">
+    <title>Mi Cuenta - DeporShop</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <img src="./img/brand-mark.svg" alt="" class="logo-icon">
+                </div>
+                <h1 class="header__nombre">DeporShop</h1>
+            </div>
+            
+            <nav class="header__nav" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="productos.html" class="nav-link">Productos</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+
+            <div class="header__actions">
+                <button class="icon-button" aria-label="Buscar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+                <a href="usuario.html" class="icon-button active" aria-label="Usuario">
+                    <img src="./img/Usuario.svg" alt="">
+                </a>
+                <a href="carrito.html" class="icon-button cart-button" aria-label="Carrito de compras">
+                    <img src="./img/Carrito.png" alt="">
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+
+            <div class="header__social">
+                <a href="#" aria-label="Facebook" class="social-link">
+                    <img src="./img/Facebook.svg" alt="">
+                </a>
+                <a href="#" aria-label="Instagram" class="social-link">
+                    <img src="./img/Instagram.svg" alt="">
+                </a>
+                <a href="#" aria-label="Twitter" class="social-link">
+                    <img src="./img/X.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="contact-hero">
+            <div class="container">
+                <h2 class="contact-hero__title">Mi Cuenta</h2>
+                <p class="contact-hero__subtitle" id="user-subtitle">Gestiona tu información personal</p>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <!-- Vista de Login/Registro -->
+                <div id="auth-view">
+                    <div class="contact-grid">
+                        <!-- Login -->
+                        <div class="contact-form-wrapper">
+                            <h3 class="section-title">Iniciar Sesión</h3>
+                            <form id="login-form" class="contact-form">
+                                <div class="form-group">
+                                    <label for="login-email" class="form-label">Email</label>
+                                    <input type="email" id="login-email" class="form-input" required placeholder="tu@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login-password" class="form-label">Contraseña</label>
+                                    <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--large">Iniciar Sesión</button>
+                            </form>
+                        </div>
+
+                        <!-- Registro -->
+                        <div class="contact-form-wrapper">
+                            <h3 class="section-title">Crear Cuenta</h3>
+                            <form id="register-form" class="contact-form">
+                                <div class="form-group">
+                                    <label for="register-name" class="form-label">Nombre Completo</label>
+                                    <input type="text" id="register-name" class="form-input" autocomplete="name" required placeholder="Juan Pérez">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-email" class="form-label">Email</label>
+                                    <input type="email" id="register-email" class="form-input" autocomplete="email" required placeholder="tu@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-phone" class="form-label">Teléfono</label>
+                                    <input type="tel" id="register-phone" class="form-input" autocomplete="tel" required placeholder="+54 11 1234-5678">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-address" class="form-label">Dirección de entrega</label>
+                                    <input type="text" id="register-address" class="form-input" autocomplete="street-address" required placeholder="Calle y número">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-city" class="form-label">Ciudad</label>
+                                    <input type="text" id="register-city" class="form-input" autocomplete="address-level2" required placeholder="Buenos Aires">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-postal-code" class="form-label">Código postal</label>
+                                    <input type="text" id="register-postal-code" class="form-input" autocomplete="postal-code" required placeholder="C1000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-password" class="form-label">Contraseña</label>
+                                    <input type="password" id="register-password" class="form-input" required placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--large">Crear Cuenta</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista de Perfil (oculta por defecto) -->
+                <div id="profile-view" class="profile-hidden">
+                    <div class="contact-grid">
+                        <!-- Información del Usuario -->
+                        <div>
+                            <div class="contact-form-wrapper">
+                                <div class="user-header">
+                                    <h3 class="section-title">Información Personal</h3>
+                                    <button onclick="logout()" class="btn btn--secondary">Cerrar Sesión</button>
+                                </div>
+                                
+                                <div class="user-info">
+                                    <div class="user-info__avatar">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="user-info__data">
+                                        <p><strong>Nombre:</strong> <span id="profile-name">-</span></p>
+                                        <p><strong>Email:</strong> <span id="profile-email">-</span></p>
+                                        <p><strong>Teléfono:</strong> <span id="profile-phone">-</span></p>
+                                        <p><strong>Dirección:</strong> <span id="profile-address">-</span></p>
+                                        <p><strong>Ciudad:</strong> <span id="profile-city">-</span></p>
+                                        <p><strong>Código postal:</strong> <span id="profile-postal-code">-</span></p>
+                                        <p><strong>Miembro desde:</strong> <span id="profile-date">-</span></p>
+                                    </div>
+                                </div>
+
+                                <button id="edit-profile-button" onclick="editProfile()" class="btn btn--primary">Editar Perfil</button>
+
+                                <form id="profile-edit-form" class="contact-form profile-edit-form" hidden>
+                                    <h4>Editar datos personales y de entrega</h4>
+                                    <div class="form-group">
+                                        <label for="edit-name" class="form-label">Nombre completo</label>
+                                        <input type="text" id="edit-name" class="form-input" autocomplete="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-email" class="form-label">Email</label>
+                                        <input type="email" id="edit-email" class="form-input" autocomplete="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-phone" class="form-label">Teléfono</label>
+                                        <input type="tel" id="edit-phone" class="form-input" autocomplete="tel" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-address" class="form-label">Dirección de entrega</label>
+                                        <input type="text" id="edit-address" class="form-input" autocomplete="street-address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-city" class="form-label">Ciudad</label>
+                                        <input type="text" id="edit-city" class="form-input" autocomplete="address-level2" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-postal-code" class="form-label">Código postal</label>
+                                        <input type="text" id="edit-postal-code" class="form-input" autocomplete="postal-code" required>
+                                    </div>
+                                    <div class="profile-edit-form__actions">
+                                        <button type="submit" class="btn btn--primary">Guardar cambios</button>
+                                        <button type="button" onclick="cancelEditProfile()" class="btn btn--secondary">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Estadísticas -->
+                            <div class="user-stats-cards">
+                                <div class="contact-info-cards">
+                                    <div class="contact-info-card__icon">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <circle cx="9" cy="21" r="1"></circle>
+                                            <circle cx="20" cy="21" r="1"></circle>
+                                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-info-card__content">
+                                        <h4 class="contact-info-card__title">En el Carrito</h4>
+                                        <p class="contact-info-card__text" id="cart-count">0 productos</p>
+                                    </div>
+                                </div>
+                                <div class="contact-info-card">
+                                    <div class="contact-info-card__icon">
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-info-card__content">
+                                        <h4 class="contact-info-card__title">Favoritos</h4>
+                                        <p class="contact-info-card__text" id="favorites-count">0 productos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- Historial de Compras (Placeholder) -->
+                        <div class="contact-form-wrapper">
+                            <h3 class="section-title">Historial de Compras</h3>
+                            <div class="user-orders">
+                                <div class="user-orders__empty">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 7h-9m9 4h-9"></path>
+                                        <path d="M4 7h1m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0v12m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <p>Aún no has realizado compras</p>
+                                    <a href="productos.html" class="btn btn--primary">Ver Productos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">DeporShop</h3>
+                    <p class="footer__text">Tu tienda de confianza en Buenos Aires, Argentina</p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Facebook" class="social-link">
+                            <img src="./img/Facebook.svg" alt="">
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <img src="./img/Instagram.svg" alt="">
+                        </a>
+                        <a href="#" aria-label="Twitter" class="social-link">
+                            <img src="./img/X.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Enlaces Rápidos</h4>
+                    <nav class="footer__links">
+                        <a href="sobrenosotros.html">Sobre Nosotros</a>
+                        <a href="productos.html">Productos</a>
+                        <a href="contacto.html">Contacto</a>
+                        <a href="blog.html">Blog</a>
+                    </nav>
+                </div>
+
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Ayuda</h4>
+                    <nav class="footer__links">
+                        <a href="preguntasfrecuentes.html">Preguntas Frecuentes</a>
+                        <a href="envios.html">Envíos</a>
+                        <a href="devoluciones.html">Devoluciones</a>
+                        <a href="terminosdeuso.html">Términos y Condiciones</a>
+                    </nav>
+                </div>
+
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Newsletter</h4>
+                    <p class="footer__text">Recibe nuestras ofertas</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu email" required>
+                        <button type="submit">Suscribir</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2024 DeporShop. Todos los derechos reservados. Buenos Aires, Argentina.</p>
+                <nav class="footer__legal">
+                    <a href="politicadeprivacidad.html">Política de Privacidad</a>
+                    <a href="terminosdeuso.html">Términos de Uso</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/favoritos.js"></script>
+    <script>
+        // Sistema de usuarios con localStorage
+        const authView = document.getElementById('auth-view');
+        const profileView = document.getElementById('profile-view');
+
+        // Verificar si hay usuario logueado
+        function checkAuth() {
+            const user = localStorage.getItem('deporshop_user');
+            if (user) {
+                showProfile(JSON.parse(user));
+            } else {
+                showAuth();
+            }
+        }
+
+        // Mostrar vista de autenticación
+        function showAuth() {
+            authView.style.display = 'block';
+            profileView.style.display = 'none';
+            document.getElementById('user-subtitle').textContent = 'Inicia sesión o crea una cuenta';
+        }
+
+        // Mostrar perfil
+        function showProfile(user) {
+            authView.style.display = 'none';
+            profileView.style.display = 'block';
+            profileView.classList.remove('profile-hidden');
+            
+            document.getElementById('user-subtitle').textContent = `¡Bienvenido, ${user.name.split(' ')[0]}!`;
+            document.getElementById('profile-name').textContent = user.name;
+            document.getElementById('profile-email').textContent = user.email;
+            document.getElementById('profile-phone').textContent = user.phone || 'No especificado';
+            document.getElementById('profile-address').textContent = user.address || 'No especificada';
+            document.getElementById('profile-city').textContent = user.city || 'No especificada';
+            document.getElementById('profile-postal-code').textContent = user.postalCode || 'No especificado';
+            document.getElementById('profile-date').textContent = new Date(user.createdAt).toLocaleDateString('es-AR');
+            
+            // Actualizar estadísticas
+            if (window.cart) {
+                document.getElementById('cart-count').textContent = `${cart.getTotalItems()} productos`;
+            }
+            if (window.favorites) {
+                document.getElementById('favorites-count').textContent = `${favorites.getCount()} productos`;
+            }
+        }
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Simulación de login (en producción: validar con backend)
+            const storedUser = localStorage.getItem('deporshop_user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                if (user.email === email) {
+                    showProfile(user);
+                    alert('¡Sesión iniciada correctamente!');
+                } else {
+                    alert('Credenciales incorrectas');
+                }
+            } else {
+                alert('Usuario no encontrado. Por favor, crea una cuenta.');
+            }
+        });
+
+        // Registro
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const user = {
+                name: document.getElementById('register-name').value.trim(),
+                email: document.getElementById('register-email').value.trim(),
+                phone: document.getElementById('register-phone').value.trim(),
+                address: document.getElementById('register-address').value.trim(),
+                city: document.getElementById('register-city').value.trim(),
+                postalCode: document.getElementById('register-postal-code').value.trim(),
+                password: document.getElementById('register-password').value, // En producción: hashear
+                createdAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('deporshop_user', JSON.stringify(user));
+            showProfile(user);
+            alert('¡Cuenta creada exitosamente!');
+            
+            // Limpiar formulario
+            e.target.reset();
+        });
+
+        // Cerrar sesión
+        function logout() {
+            if (confirm('¿Cerrar sesión?')) {
+                localStorage.removeItem('deporshop_user');
+                showAuth();
+                alert('Sesión cerrada correctamente');
+            }
+        }
+
+        // Editar perfil y datos usados por el checkout
+        function editProfile() {
+            const storedUser = localStorage.getItem('deporshop_user');
+            if (!storedUser) return;
+
+            const user = JSON.parse(storedUser);
+            document.getElementById('edit-name').value = user.name || '';
+            document.getElementById('edit-email').value = user.email || '';
+            document.getElementById('edit-phone').value = user.phone || '';
+            document.getElementById('edit-address').value = user.address || '';
+            document.getElementById('edit-city').value = user.city || '';
+            document.getElementById('edit-postal-code').value = user.postalCode || '';
+            document.getElementById('profile-edit-form').hidden = false;
+            document.getElementById('edit-profile-button').hidden = true;
+            document.getElementById('edit-name').focus();
+        }
+
+        function cancelEditProfile() {
+            document.getElementById('profile-edit-form').hidden = true;
+            document.getElementById('edit-profile-button').hidden = false;
+        }
+
+        document.getElementById('profile-edit-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const storedUser = localStorage.getItem('deporshop_user');
+            if (!storedUser) return;
+
+            const user = JSON.parse(storedUser);
+            const updatedUser = {
+                ...user,
+                name: document.getElementById('edit-name').value.trim(),
+                email: document.getElementById('edit-email').value.trim(),
+                phone: document.getElementById('edit-phone').value.trim(),
+                address: document.getElementById('edit-address').value.trim(),
+                city: document.getElementById('edit-city').value.trim(),
+                postalCode: document.getElementById('edit-postal-code').value.trim()
+            };
+
+            localStorage.setItem('deporshop_user', JSON.stringify(updatedUser));
+            showProfile(updatedUser);
+            cancelEditProfile();
+            alert('Perfil actualizado correctamente. Estos datos se usarán en tu próxima compra.');
+        });
+
+        // Inicializar
+        checkAuth();
+    </script>
+</body>
+</html>
