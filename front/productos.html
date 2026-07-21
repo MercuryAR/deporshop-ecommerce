@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo de productos DeporShop - Zapatillas deportivas y accesorios">
+    <meta name="keywords" content="zapatillas, deportivas, accesorios, comprar online">
+    <title>Productos - DeporShop</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <img src="./img/brand-mark.svg" alt="" class="logo-icon">
+                </div>
+                <h1 class="header__nombre">DeporShop</h1>
+            </div>
+
+            <nav class="header__nav" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="productos.html" class="nav-link active">Productos</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+
+            <div class="header__actions">
+                <button class="icon-button" aria-label="Buscar" onclick="toggleSearch()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                </button>
+                <a href="usuario.html" class="icon-button" aria-label="Usuario">
+                    <img src="./img/Usuario.svg" alt="">
+                </a>
+                <a href="carrito.html" class="icon-button cart-button" aria-label="Carrito de compras">
+                    <img src="./img/Carrito.png" alt="">
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+
+            <div class="header__social">
+                <a href="javascript:void(0)" aria-label="Facebook" class="social-link">
+                    <img src="./img/Facebook.svg" alt="">
+                </a>
+                <a href="javascript:void(0)" aria-label="Instagram" class="social-link">
+                    <img src="./img/Instagram.svg" alt="">
+                </a>
+                <a href="javascript:void(0)" aria-label="Twitter" class="social-link">
+                    <img src="./img/X.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Ruta de navegación" style="padding: var(--space-lg) 0; background: var(--color-bg-secondary);">
+            <div class="container" style="display: flex; gap: var(--space-sm); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                <a href="index.html" style="color: var(--color-primary);">Inicio</a>
+                <span>/</span>
+                <span>Productos</span>
+            </div>
+        </nav>
+
+        <!-- Filtros y Productos -->
+        <section class="products-section" style="padding: var(--space-3xl) 0;">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 250px 1fr; gap: var(--space-3xl);">
+                    <!-- Sidebar de Filtros -->
+                    <aside style="background: var(--color-bg-secondary); padding: var(--space-lg); border-radius: var(--radius-lg);">
+                        <div style="margin-bottom: var(--space-2xl);">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin-bottom: var(--space-md);">Categorías</h3>
+                            <div id="categoriesFilter" style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); cursor: pointer;">
+                                    <input type="radio" name="categoria" value="all" checked>
+                                    <span>Todas las categorías</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-2xl);">
+                            <h3 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin-bottom: var(--space-md);">Filtros</h3>
+                            <label style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); cursor: pointer;">
+                                <input type="checkbox" id="soloEnStock">
+                                <span>Solo en stock</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: var(--space-sm); cursor: pointer;">
+                                <input type="checkbox" id="soloConDescuento">
+                                <span>Solo descuentos</span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <h3 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin-bottom: var(--space-md);">Ordenar por</h3>
+                            <select id="ordenar" class="form-select" style="width: 100%;">
+                                <option value="relevancia">Relevancia</option>
+                                <option value="precio-asc">Precio: menor a mayor</option>
+                                <option value="precio-desc">Precio: mayor a menor</option>
+                                <option value="nombre">Nombre (A-Z)</option>
+                                <option value="rating">Mejor valorado</option>
+                            </select>
+                        </div>
+                    </aside>
+
+                    <!-- Grid de Productos -->
+                    <div>
+                        <div style="margin-bottom: var(--space-2xl);">
+                            <h2 style="font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-md);">Nuestro Catálogo</h2>
+                            <div style="color: var(--color-text-secondary);">
+                                <span id="productCount">Cargando...</span> productos encontrados
+                            </div>
+                        </div>
+
+                        <div id="productosContainer" class="products-grid">
+                            <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                                <p>Cargando productos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3 class="footer__title">DeporShop</h3>
+                    <p class="footer__text">Tu tienda de confianza en Buenos Aires, Argentina</p>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__subtitle">Enlaces Rápidos</h4>
+                    <nav class="footer__links">
+                        <a href="sobrenosotros.html">Sobre Nosotros</a>
+                        <a href="productos.html">Productos</a>
+                        <a href="contacto.html">Contacto</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 DeporShop. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay" aria-hidden="true">
+        <div class="search-container">
+            <button id="closeSearch" class="close-search" aria-label="Cerrar búsqueda">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" placeholder="¿Qué estás buscando?" autocomplete="off">
+                <button type="submit" class="search-submit" aria-label="Buscar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/productos.js"></script>
+</body>
+
+</html>

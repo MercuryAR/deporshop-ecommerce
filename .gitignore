@@ -1,0 +1,13 @@
+.DS_Store
+**/.DS_Store
+.claude/
+.idea/
+.vscode/
+
+# Java / Maven
+back/target/
+*.class
+*.log
+
+# Fuentes y duplicados generados localmente; el sitio usa los WebP optimizados
+front/img/carousel/generated/
