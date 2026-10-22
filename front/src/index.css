@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +6,19 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes fadeIn {
@@ -46,15 +59,15 @@ img {
   }
 
   .btn-primary {
-    @apply btn bg-gradient-to-br from-primary to-primary-light text-white shadow-md hover:shadow-lg hover:-translate-y-0.5;
+    @apply btn bg-primary text-white hover:bg-primary-light;
   }
 
   .btn-accent {
-    @apply btn bg-gradient-to-br from-accent to-accent-light text-white shadow-md hover:shadow-lg hover:-translate-y-0.5;
+    @apply btn bg-accent text-white hover:bg-orange-700;
   }
 
   .btn-outline {
-    @apply btn bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white;
+    @apply btn bg-transparent text-primary border border-gray-300 hover:border-primary hover:bg-gray-50;
   }
 
   .btn-secondary {
@@ -62,11 +75,11 @@ img {
   }
 
   .btn-ghost {
-    @apply btn bg-transparent text-primary px-4 py-2 hover:bg-gray-50;
+    @apply btn bg-transparent text-primary px-4 py-2 hover:bg-gray-100;
   }
 
   .btn-error {
-    @apply btn bg-error text-white shadow-md hover:opacity-90;
+    @apply btn bg-error text-white hover:bg-red-600;
   }
 
   .btn-loading-bar {

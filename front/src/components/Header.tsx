@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
 import { useAuthStore } from '../store/authStore';
+import { CartIcon, CloseIcon, MenuIcon, UserIcon } from './Icons';
+
+const NAV_LINKS = [
+  { to: '/', label: 'Inicio', end: true },
+  { to: '/productos', label: 'Productos' },
+  { to: '/contacto', label: 'Contacto' },
+];
 
 export default function Header() {
   const cantidad = useCartStore((s) => s.cantidad);
@@ -10,75 +17,72 @@ export default function Header() {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `px-4 py-2 rounded-lg font-medium transition-colors ${
-      isActive ? 'bg-white/15' : 'hover:bg-white/15'
+      isActive ? 'bg-white/15 text-white' : 'text-white/75 hover:text-white hover:bg-white/10'
     }`;
 
+  const iconButton =
+    'relative w-10 h-10 flex items-center justify-center rounded-lg text-white hover:bg-white/15 transition-colors';
+
   return (
-    <header className="bg-gradient-to-br from-primary to-primary-light text-white sticky top-0 z-50 shadow-md">
-      <div className="container-app flex items-center justify-between gap-4 flex-wrap py-4">
-        <Link to="/" className="flex items-center gap-3">
-          <svg viewBox="0 0 50 50" className="w-10 h-10 drop-shadow-sm">
-            <circle cx="25" cy="25" r="20" fill="currentColor" />
-            <path d="M15 25 L25 35 L40 20" stroke="white" strokeWidth="3" fill="none" />
+    <header className="bg-primary text-white sticky top-0 z-50 border-b border-white/10">
+      <div className="container-app flex items-center justify-between gap-4 h-16">
+        <Link to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
+          <svg viewBox="0 0 32 32" className="w-8 h-8" aria-hidden="true">
+            <rect width="32" height="32" rx="8" className="fill-accent" />
+            <path d="M8 21 L14 11 L18 17 L21 13 L25 21" stroke="white" strokeWidth="2.5" fill="none" strokeLinejoin="round" strokeLinecap="round" />
           </svg>
-          <span className="font-display text-3xl font-bold [text-shadow:2px_2px_4px_rgba(0,0,0,0.2)]">
-            DeporShop
+          <span className="font-display italic text-2xl font-extrabold uppercase tracking-wide">
+            Depor<span className="text-accent">Shop</span>
           </span>
         </Link>
 
         <nav className="hidden md:flex gap-1" aria-label="Navegación principal">
-          <NavLink to="/" end className={navLinkClass}>
-            Inicio
-          </NavLink>
-          <NavLink to="/productos" className={navLinkClass}>
-            Productos
-          </NavLink>
-          <NavLink to="/contacto" className={navLinkClass}>
-            Contacto
-          </NavLink>
+          {NAV_LINKS.map((l) => (
+            <NavLink key={l.to} to={l.to} end={l.end} className={navLinkClass}>
+              {l.label}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Link
             to={isAuthenticated ? '/perfil' : '/login'}
-            aria-label="Usuario"
-            className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 hover:-translate-y-0.5 transition-all"
+            aria-label={isAuthenticated ? 'Mi perfil' : 'Iniciar sesión'}
+            className={iconButton}
           >
-            <img src="/img/Usuario.svg" alt="" className="w-5 h-5" />
+            <UserIcon />
           </Link>
           <Link
             to="/carrito"
-            aria-label="Carrito de compras"
-            className="relative w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 hover:-translate-y-0.5 transition-all"
+            aria-label={`Carrito de compras${cantidad > 0 ? `, ${cantidad} productos` : ''}`}
+            className={iconButton}
           >
-            <img src="/img/Carrito.png" alt="" className="w-5 h-5" />
+            <CartIcon />
             {cantidad > 0 && (
-              <span className="absolute -top-1 -right-1 bg-accent text-white text-xs font-bold min-w-[18px] text-center rounded-full px-1.5 py-0.5">
+              <span className="absolute -top-0.5 -right-0.5 bg-accent text-white text-[11px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 ring-2 ring-primary">
                 {cantidad}
               </span>
             )}
           </Link>
           <button
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 transition-all"
-            aria-label="Abrir menú"
+            className={`md:hidden ${iconButton}`}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
+            aria-controls="menu-movil"
             onClick={() => setMenuOpen((o) => !o)}
           >
-            ☰
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </div>
 
       {menuOpen && (
-        <nav className="md:hidden flex flex-col gap-1 px-4 pb-4" aria-label="Navegación móvil">
-          <NavLink to="/" end className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            Inicio
-          </NavLink>
-          <NavLink to="/productos" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            Productos
-          </NavLink>
-          <NavLink to="/contacto" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            Contacto
-          </NavLink>
+        <nav id="menu-movil" className="md:hidden flex flex-col gap-1 px-4 pb-4 border-t border-white/10 pt-3" aria-label="Navegación móvil">
+          {NAV_LINKS.map((l) => (
+            <NavLink key={l.to} to={l.to} end={l.end} className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              {l.label}
+            </NavLink>
+          ))}
         </nav>
       )}
     </header>

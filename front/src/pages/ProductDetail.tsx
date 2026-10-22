@@ -3,6 +3,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { Producto } from '../types/Producto';
 import { getProducto, formatearPrecio } from '../services/api';
 import { useCartStore } from '../store/cartStore';
+import ProductImage from '../components/ProductImage';
+import Rating from '../components/Rating';
+import { ArrowLeftIcon, CheckIcon } from '../components/Icons';
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -27,7 +30,18 @@ export default function ProductDetail() {
   }, [id]);
 
   if (loading) {
-    return <p className="text-center py-24 text-gray-500">Cargando producto…</p>;
+    return (
+      <div className="container-app py-10 grid md:grid-cols-2 gap-10 animate-pulse" role="status" aria-label="Cargando producto">
+        <div className="aspect-square rounded-xl bg-gray-100" />
+        <div className="flex flex-col gap-4 pt-2">
+          <div className="h-4 w-1/4 bg-gray-100 rounded" />
+          <div className="h-9 w-3/4 bg-gray-100 rounded" />
+          <div className="h-8 w-1/3 bg-gray-100 rounded" />
+          <div className="h-24 w-full bg-gray-100 rounded" />
+          <div className="h-12 w-48 bg-gray-100 rounded-lg" />
+        </div>
+      </div>
+    );
   }
 
   if (error || !producto) {
@@ -43,7 +57,6 @@ export default function ProductDetail() {
 
   const tieneDescuento = producto.descuento > 0;
   const precioFinal = producto.precio * (1 - producto.descuento / 100);
-  const rating = Math.round(producto.rating ?? 0);
 
   async function handleAdd() {
     setAdding(true);
@@ -58,20 +71,16 @@ export default function ProductDetail() {
 
   return (
     <div className="container-app py-10">
-      <button onClick={() => navigate(-1)} className="text-primary hover:underline mb-6">
-        ← Volver
+      <button
+        onClick={() => navigate(-1)}
+        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary mb-6"
+      >
+        <ArrowLeftIcon className="w-4 h-4" /> Volver
       </button>
 
-      <div className="grid md:grid-cols-2 gap-10">
-        <div className="aspect-square rounded-xl overflow-hidden bg-gray-100 shadow-md">
-          <img
-            src={producto.imagenUrl || '/img/placeholder.png'}
-            alt={producto.nombre}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = '/img/placeholder.png';
-            }}
-          />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="aspect-square rounded-xl overflow-hidden bg-gray-100">
+          <ProductImage src={producto.imagenUrl} alt={producto.nombre} className="w-full h-full" />
         </div>
 
         <div>
@@ -81,28 +90,24 @@ export default function ProductDetail() {
           <h1 className="text-3xl font-bold mb-4">{producto.nombre}</h1>
 
           {producto.rating > 0 && (
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-amber-400 text-lg">
-                {'★'.repeat(rating)}
-                {'☆'.repeat(5 - rating)}
-              </span>
-              <span className="text-gray-500">({producto.resenas} reseñas)</span>
+            <div className="mb-4">
+              <Rating value={producto.rating} reviews={producto.resenas} size="md" />
             </div>
           )}
 
           <div className="mb-6">
             {tieneDescuento ? (
-              <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-error">{formatearPrecio(precioFinal)}</span>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-3xl font-bold text-accent">{formatearPrecio(precioFinal)}</span>
                 <span className="text-lg line-through text-gray-500">
                   {formatearPrecio(producto.precio)}
                 </span>
-                <span className="badge bg-error text-white px-3 py-1 rounded-full text-sm font-bold">
+                <span className="bg-accent text-white px-2.5 py-1 rounded-md text-sm font-bold">
                   -{Math.round(producto.descuento)}%
                 </span>
               </div>
             ) : (
-              <span className="text-3xl font-bold text-accent">{formatearPrecio(producto.precio)}</span>
+              <span className="text-3xl font-bold text-gray-900">{formatearPrecio(producto.precio)}</span>
             )}
           </div>
 
@@ -124,6 +129,7 @@ export default function ProductDetail() {
               <button
                 className="w-9 h-9 border border-gray-200 rounded-md font-bold hover:bg-primary hover:text-white transition-colors"
                 onClick={() => setCantidad((c) => Math.max(1, c - 1))}
+                aria-label="Disminuir cantidad"
               >
                 −
               </button>
@@ -139,6 +145,7 @@ export default function ProductDetail() {
               <button
                 className="w-9 h-9 border border-gray-200 rounded-md font-bold hover:bg-primary hover:text-white transition-colors"
                 onClick={() => setCantidad((c) => Math.min(producto.stock || 99, c + 1))}
+                aria-label="Aumentar cantidad"
               >
                 +
               </button>
@@ -150,7 +157,15 @@ export default function ProductDetail() {
             disabled={producto.stock === 0 || adding}
             onClick={handleAdd}
           >
-            {added ? 'Agregado al carrito ✓' : adding ? 'Agregando…' : 'Agregar al carrito'}
+            {added ? (
+              <>
+                <CheckIcon className="w-5 h-5" /> Agregado al carrito
+              </>
+            ) : adding ? (
+              'Agregando…'
+            ) : (
+              'Agregar al carrito'
+            )}
           </button>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import type { CarritoItem } from '../types/Carrito';
 import { formatearPrecio } from '../services/api';
 import { useCartStore } from '../store/cartStore';
+import ProductImage from './ProductImage';
+import { TrashIcon } from './Icons';
 
 interface CartItemProps {
   item: CarritoItem;
@@ -12,13 +14,10 @@ export default function CartItem({ item }: CartItemProps) {
 
   return (
     <div className="grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr_auto_auto] gap-4 items-center p-4 sm:p-5 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-      <img
-        src={item.imagenUrl || '/img/placeholder.png'}
+      <ProductImage
+        src={item.imagenUrl}
         alt={item.nombre}
-        className="w-20 h-20 sm:w-[100px] sm:h-[100px] object-cover rounded-md row-span-2 sm:row-span-1"
-        onError={(e) => {
-          (e.target as HTMLImageElement).src = '/img/placeholder.png';
-        }}
+        className="w-20 h-20 sm:w-[100px] sm:h-[100px] rounded-md row-span-2 sm:row-span-1"
       />
 
       <div className="flex flex-col gap-1 col-start-2 sm:col-start-auto">
@@ -56,11 +55,11 @@ export default function CartItem({ item }: CartItemProps) {
       </div>
 
       <button
-        className="col-start-2 sm:col-start-auto justify-self-end w-9 h-9 flex items-center justify-center text-gray-500 hover:text-error hover:scale-110 transition-all"
+        className="col-start-2 sm:col-start-auto justify-self-end w-9 h-9 flex items-center justify-center rounded-md text-gray-400 hover:text-error hover:bg-red-50 transition-colors"
         onClick={() => removeItem(item.productoId)}
         aria-label={`Eliminar ${item.nombre} del carrito`}
       >
-        🗑
+        <TrashIcon className="w-5 h-5" />
       </button>
     </div>
   );

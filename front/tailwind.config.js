@@ -19,7 +19,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-        display: ['Caveat', 'cursive'],
+        display: ['"Barlow Condensed"', 'Inter', 'sans-serif'],
       },
       borderRadius: {
         sm: '0.375rem',

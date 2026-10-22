@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 import ProductCard from '../components/ProductCard';
+import { ProductGridSkeleton } from '../components/ProductCardSkeleton';
+import { ArrowRightIcon, BadgeCheckIcon, ReturnIcon, ShieldIcon, TruckIcon } from '../components/Icons';
 import { useProductStore } from '../store/productStore';
 import { ENVIO_GRATIS_DESDE } from '../store/cartStore';
 import { formatearPrecio } from '../services/api';
@@ -35,14 +37,14 @@ const FEATURED_SLIDES: CarouselSlide[] = [
 ];
 
 const BENEFITS = [
-  { icon: '🚚', title: 'Envío Gratis', text: `En compras superiores a ${formatearPrecio(ENVIO_GRATIS_DESDE)}` },
-  { icon: '↩️', title: 'Devoluciones fáciles', text: '30 días para cambios y devoluciones' },
-  { icon: '🔒', title: 'Compra segura', text: 'Tus datos siempre protegidos' },
-  { icon: '⭐', title: 'Calidad garantizada', text: 'Productos seleccionados y verificados' },
+  { icon: TruckIcon, title: 'Envío gratis', text: `En compras superiores a ${formatearPrecio(ENVIO_GRATIS_DESDE)}` },
+  { icon: ReturnIcon, title: 'Devoluciones fáciles', text: '30 días para cambios y devoluciones' },
+  { icon: ShieldIcon, title: 'Compra segura', text: 'Tus datos siempre protegidos' },
+  { icon: BadgeCheckIcon, title: 'Calidad garantizada', text: 'Productos seleccionados y verificados' },
 ];
 
 export default function Home() {
-  const { productos, fetchProductos, fetchCategorias } = useProductStore();
+  const { productos, loading, error, fetchProductos, fetchCategorias } = useProductStore();
 
   useEffect(() => {
     fetchProductos();
@@ -53,55 +55,78 @@ export default function Home() {
 
   return (
     <div>
-      <section className="bg-gradient-to-b from-gray-50 to-white py-12 md:py-16">
-        <div className="container-app">
-          <div className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
-              Encuentra tu próximo par en <span className="text-accent">DeporShop</span>
-            </h1>
-            <p className="text-lg text-gray-500">
-              Zapatillas y accesorios deportivos de calidad al mejor precio
+      <section className="bg-primary text-white overflow-hidden">
+        <div className="container-app grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-12 md:py-20">
+          <div>
+            <p className="inline-block text-xs font-semibold uppercase tracking-widest text-accent-light bg-white/10 rounded-full px-3 py-1 mb-5">
+              Nueva temporada
             </p>
+            <h1 className="font-display italic uppercase font-extrabold text-5xl md:text-7xl leading-[0.95] tracking-tight mb-5">
+              Encuentra tu <span className="text-accent">próximo par</span>
+            </h1>
+            <p className="text-lg text-white/70 max-w-md mb-8">
+              Zapatillas y accesorios deportivos de calidad al mejor precio, con envío a todo el país.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/productos" className="btn-accent px-6 py-3">
+                Ver productos <ArrowRightIcon className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/productos?descuento=1"
+                className="btn bg-white/10 text-white hover:bg-white/20 px-6 py-3"
+              >
+                Ofertas
+              </Link>
+            </div>
           </div>
 
-          <div className="px-4">
-            <Carousel slides={FEATURED_SLIDES} />
-          </div>
+          <Carousel slides={FEATURED_SLIDES} />
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container-app">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {BENEFITS.map((b) => (
-              <div
-                key={b.title}
-                className="bg-white p-8 rounded-xl text-center shadow-md border border-black/5 transition-all hover:-translate-y-2 hover:shadow-xl"
-              >
-                <div className="text-5xl mb-4">{b.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{b.title}</h3>
-                <p className="text-gray-500">{b.text}</p>
+      <section className="border-b border-gray-200">
+        <div className="container-app grid sm:grid-cols-2 lg:grid-cols-4 gap-5 py-8">
+          {BENEFITS.map(({ icon: Icon, title, text }) => (
+            <div key={title} className="flex items-start gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-lg bg-orange-50 text-accent flex items-center justify-center">
+                <Icon />
               </div>
-            ))}
-          </div>
+              <div>
+                <h3 className="font-semibold text-gray-900">{title}</h3>
+                <p className="text-sm text-gray-500">{text}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container-app">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">Productos destacados</h2>
-          <p className="text-lg text-gray-500 text-center mb-10">
-            Los favoritos de nuestros clientes
-          </p>
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2">Productos destacados</h2>
+              <p className="text-gray-500">Los favoritos de nuestros clientes</p>
+            </div>
+            <Link
+              to="/productos"
+              className="hidden sm:inline-flex items-center gap-1.5 font-semibold text-primary hover:text-accent transition-colors"
+            >
+              Ver todo <ArrowRightIcon className="w-4 h-4" />
+            </Link>
+          </div>
 
-          {destacados.length > 0 ? (
+          {error && destacados.length === 0 ? (
+            <p className="text-center text-gray-500 py-10">No pudimos cargar los productos. Intenta de nuevo más tarde.</p>
+          ) : loading && destacados.length === 0 ? (
+            <ProductGridSkeleton />
+          ) : destacados.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {destacados.map((producto) => (
                 <ProductCard key={producto.id} producto={producto} />
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500">Cargando productos destacados…</p>
+            <p className="text-center text-gray-500 py-10">Todavía no hay productos destacados.</p>
           )}
 
           <div className="text-center mt-10">

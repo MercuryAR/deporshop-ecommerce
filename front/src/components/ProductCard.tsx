@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import type { Producto } from '../types/Producto';
 import { formatearPrecio } from '../services/api';
 import { useCartStore } from '../store/cartStore';
+import ProductImage from './ProductImage';
+import Rating from './Rating';
+import { CheckIcon } from './Icons';
 
 interface ProductCardProps {
   producto: Producto;
@@ -15,7 +18,6 @@ export default function ProductCard({ producto }: ProductCardProps) {
 
   const tieneDescuento = producto.descuento > 0;
   const precioFinal = producto.precio * (1 - producto.descuento / 100);
-  const rating = Math.round(producto.rating ?? 0);
 
   async function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -31,19 +33,23 @@ export default function ProductCard({ producto }: ProductCardProps) {
   }
 
   return (
-    <article className="flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent">
-      <Link to={`/producto/${producto.id}`} className="relative aspect-square block overflow-hidden bg-gray-100 group">
-        <img
-          src={producto.imagenUrl || '/img/placeholder.png'}
+    <article className="group flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden transition-shadow hover:shadow-lg">
+      <Link to={`/producto/${producto.id}`} className="relative aspect-square block overflow-hidden bg-gray-100">
+        <ProductImage
+          src={producto.imagenUrl}
           alt={producto.nombre}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = '/img/placeholder.png';
-          }}
+          className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+            producto.stock === 0 ? 'opacity-50 grayscale' : ''
+          }`}
         />
         {tieneDescuento && (
-          <span className="absolute top-3 right-3 bg-error text-white text-sm font-bold px-3 py-1 rounded-full shadow-md">
+          <span className="absolute top-3 left-3 bg-accent text-white text-xs font-bold px-2.5 py-1 rounded-md">
             -{Math.round(producto.descuento)}%
+          </span>
+        )}
+        {producto.stock === 0 && (
+          <span className="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-md">
+            Agotado
           </span>
         )}
       </Link>
@@ -53,52 +59,54 @@ export default function ProductCard({ producto }: ProductCardProps) {
           {producto.categoria?.nombre || 'Producto'}
         </p>
         <Link to={`/producto/${producto.id}`}>
-          <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-accent transition-colors">
+          <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 hover:text-accent transition-colors">
             {producto.nombre}
           </h3>
         </Link>
 
         {producto.rating > 0 && (
-          <div className="flex items-center gap-1 mb-3 text-sm">
-            <span className="text-amber-400">
-              {'★'.repeat(rating)}
-              {'☆'.repeat(5 - rating)}
-            </span>
-            <span className="text-gray-500">({producto.resenas})</span>
+          <div className="mb-3">
+            <Rating value={producto.rating} reviews={producto.resenas} />
           </div>
         )}
 
-        <div className="flex items-center justify-between gap-3 mt-auto pt-3 border-t border-gray-200">
+        {producto.stock > 0 && producto.stock < 5 && (
+          <p className="text-amber-700 font-medium text-xs mb-3">¡Últimas {producto.stock} unidades!</p>
+        )}
+
+        <div className="flex items-end justify-between gap-3 mt-auto pt-3 border-t border-gray-200 min-h-[4.25rem]">
           <div>
             {tieneDescuento ? (
               <>
-                <span className="block text-sm line-through text-gray-500">
-                  {formatearPrecio(producto.precio)}
-                </span>
-                <span className="block text-xl font-bold text-error">
+                <span className="block text-xl font-bold text-accent">
                   {formatearPrecio(precioFinal)}
+                </span>
+                <span className="block text-sm line-through text-gray-400">
+                  {formatearPrecio(producto.precio)}
                 </span>
               </>
             ) : (
-              <span className="text-xl font-bold text-accent">{formatearPrecio(producto.precio)}</span>
+              <span className="text-xl font-bold text-gray-900">{formatearPrecio(producto.precio)}</span>
             )}
           </div>
           <button
-            className="btn-accent btn text-sm py-2 px-4 disabled:opacity-60"
+            className={`text-sm py-2 px-4 ${added ? 'btn bg-success text-white' : 'btn-primary'}`}
             disabled={producto.stock === 0 || adding}
             onClick={handleAddToCart}
+            aria-live="polite"
           >
-            {added ? 'Agregado ✓' : adding ? 'Agregando…' : 'Agregar'}
+            {added ? (
+              <>
+                <CheckIcon className="w-4 h-4" /> Agregado
+              </>
+            ) : adding ? (
+              'Agregando…'
+            ) : (
+              'Agregar'
+            )}
           </button>
         </div>
 
-        {producto.stock === 0 ? (
-          <p className="text-center text-error font-bold mt-3 text-sm">Agotado</p>
-        ) : producto.stock < 5 ? (
-          <p className="text-center text-warning font-semibold text-xs mt-3">
-            Quedan {producto.stock} unidades
-          </p>
-        ) : null}
       </div>
     </article>
   );

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useProductStore } from '../store/productStore';
 import ProductCard from './ProductCard';
+import { ProductGridSkeleton } from './ProductCardSkeleton';
 
 interface ProductListProps {
   showFilters?: boolean;
@@ -29,7 +30,7 @@ export default function ProductList({ showFilters = true }: ProductListProps) {
   return (
     <div>
       {showFilters && (
-        <div className="bg-white p-6 rounded-xl shadow-md mb-8">
+        <div className="bg-white p-6 rounded-xl border border-gray-200 mb-8">
           <div className="grid gap-4 md:grid-cols-5 items-end">
             <div className="md:col-span-2 flex flex-col gap-2">
               <label htmlFor="buscar" className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
@@ -116,7 +117,7 @@ export default function ProductList({ showFilters = true }: ProductListProps) {
         </div>
       )}
 
-      {loading && <p className="text-center py-16 text-gray-500">Cargando productos…</p>}
+      {loading && <ProductGridSkeleton />}
 
       {error && (
         <div className="text-center py-16">
