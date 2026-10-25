@@ -31,6 +31,27 @@ La interfaz tiene un **rediseño UX/UI propio**: primero diseñé un design syst
 
 ## Diseño UX/UI
 
+### Antes y después del rediseño
+
+El proyecto evolucionó desde una interfaz funcional hacia una experiencia visual propia, diseñada en Figma e implementada con React y Tailwind CSS.
+
+**Diseño original**
+
+![DeporShop - Página de inicio original](docs/screenshots/original/deporshop-original-inicio.png)
+
+**Rediseño UX/UI - Desktop**
+
+![DeporShop - Página de inicio rediseñada](docs/screenshots/redesign/deporshop-uxui-desktop-inicio.png)
+
+### Diseño responsive
+
+La interfaz se adapta a diferentes tamaños de pantalla, manteniendo la identidad visual y la experiencia de navegación.
+
+| Desktop | Tablet | Mobile |
+|:---:|:---:|:---:|
+| ![Desktop](docs/screenshots/redesign/deporshop-uxui-desktop-inicio.png) | ![Tablet](docs/screenshots/redesign/deporshop-uxui-tablet-inicio.png) | ![Mobile](docs/screenshots/redesign/deporshop-uxui-mobile-inicio.png) |
+| 1440 px | 768 px | 390 px |
+
 El frontend se rediseñó a partir de un design system propio hecho en Figma: [DeporShop · Design System & UI Kit](https://www.figma.com/design/Ibv9Mpnu3sfmkWkLti7Lvr/Deporshop?node-id=14-2).
 
 El design system define:
@@ -58,7 +79,7 @@ El design system define:
 ## Estructura del proyecto
 
 ```
-CarritoDeComprasFullStack/
+deporshop-ecommerce/
 ├── back/                   # API REST (Spring Boot) — ver back/README.md
 │   └── src/main/java/com/deporshop/
 │       ├── controller/     # Endpoints REST
