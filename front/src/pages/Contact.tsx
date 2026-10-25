@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Icon from '../components/Icons';
 
 interface FormValues {
   nombre: string;
@@ -74,26 +75,24 @@ export default function Contact() {
     }
   }
 
-  function inputClass(field: keyof FormValues) {
-    if (!touched[field]) return 'form-input';
-    return errors[field] ? 'form-input border-error focus:border-error' : 'form-input border-success focus:border-success';
+  function inputClass(field: keyof FormValues, base = 'form-input') {
+    return touched[field] && errors[field] ? `${base} form-input-error` : base;
   }
 
   return (
-    <div className="container-app py-16 max-w-2xl mx-auto">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-3">Contáctanos</h1>
-      <p className="text-lg text-gray-500 text-center mb-10">
-        ¿Tienes alguna pregunta? Estamos aquí para ayudarte
-      </p>
+    <div className="container-app py-10 md:py-14 max-w-2xl">
+      <p className="section-overline mb-3">Ayuda</p>
+      <h1 className="font-display text-[36px] leading-[1.05] tracking-[-0.5px] sm:text-h1 mb-3">CONTACTO</h1>
+      <p className="text-body-lg text-musgo mb-8 md:mb-10">¿Tenés alguna pregunta? Estamos acá para ayudarte.</p>
 
       {submitted && (
-        <div className="bg-gradient-to-br from-success to-emerald-400 text-white p-4 rounded-xl mb-6 shadow-lg">
-          <h4 className="font-semibold mb-1">¡Mensaje enviado exitosamente!</h4>
-          <p className="text-sm opacity-90">Te responderemos a la brevedad</p>
+        <div className="bg-menta text-esmeralda-oscuro p-4 rounded-md mb-6" role="status">
+          <p className="text-body-strong font-bold mb-1">¡Mensaje enviado exitosamente!</p>
+          <p className="text-body-sm">Te responderemos a la brevedad</p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} noValidate className="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-black/5 flex flex-col gap-5">
+      <form onSubmit={handleSubmit} noValidate className="card p-6 md:p-8 flex flex-col gap-5">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
             <label htmlFor="nombre" className="form-label">
@@ -108,7 +107,7 @@ export default function Contact() {
               onBlur={() => handleBlur('nombre')}
             />
             {touched.nombre && errors.nombre && (
-              <p className="text-error text-sm mt-1">{errors.nombre}</p>
+              <p className="form-error">{errors.nombre}</p>
             )}
           </div>
 
@@ -125,7 +124,7 @@ export default function Contact() {
               onBlur={() => handleBlur('email')}
             />
             {touched.email && errors.email && (
-              <p className="text-error text-sm mt-1">{errors.email}</p>
+              <p className="form-error">{errors.email}</p>
             )}
           </div>
         </div>
@@ -144,7 +143,7 @@ export default function Contact() {
               onBlur={() => handleBlur('telefono')}
             />
             {touched.telefono && errors.telefono && (
-              <p className="text-error text-sm mt-1">{errors.telefono}</p>
+              <p className="form-error">{errors.telefono}</p>
             )}
           </div>
 
@@ -168,18 +167,19 @@ export default function Contact() {
           </label>
           <textarea
             id="mensaje"
-            className={`${inputClass('mensaje')} min-h-[120px] resize-y`}
+            className={inputClass('mensaje', 'form-textarea')}
+            placeholder="Contanos en qué te podemos ayudar…"
             value={values.mensaje}
             onChange={(e) => handleChange('mensaje', e.target.value)}
             onBlur={() => handleBlur('mensaje')}
           />
           {touched.mensaje && errors.mensaje && (
-            <p className="text-error text-sm mt-1">{errors.mensaje}</p>
+            <p className="form-error">{errors.mensaje}</p>
           )}
         </div>
 
-        <button type="submit" className="btn-accent w-full sm:w-auto sm:self-start text-lg px-8 py-3">
-          Enviar mensaje
+        <button type="submit" className="btn-primary btn-lg w-full sm:w-auto sm:self-start">
+          Enviar mensaje <Icon name="arrow-right" size={20} />
         </button>
       </form>
     </div>

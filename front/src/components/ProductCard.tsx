@@ -5,7 +5,8 @@ import { formatearPrecio } from '../services/api';
 import { useCartStore } from '../store/cartStore';
 import ProductImage from './ProductImage';
 import Rating from './Rating';
-import { CheckIcon } from './Icons';
+import Badge from './Badge';
+import Icon from './Icons';
 
 interface ProductCardProps {
   producto: Producto;
@@ -15,8 +16,10 @@ export default function ProductCard({ producto }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const [adding, setAdding] = useState(false);
   const [added, setAdded] = useState(false);
+  const [favorito, setFavorito] = useState(false);
 
   const tieneDescuento = producto.descuento > 0;
+  const agotado = producto.stock === 0;
   const precioFinal = producto.precio * (1 - producto.descuento / 100);
 
   async function handleAddToCart(e: React.MouseEvent) {
@@ -33,80 +36,73 @@ export default function ProductCard({ producto }: ProductCardProps) {
   }
 
   return (
-    <article className="group flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden transition-shadow hover:shadow-lg">
-      <Link to={`/producto/${producto.id}`} className="relative aspect-square block overflow-hidden bg-gray-100">
-        <ProductImage
-          src={producto.imagenUrl}
-          alt={producto.nombre}
-          className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
-            producto.stock === 0 ? 'opacity-50 grayscale' : ''
-          }`}
-        />
-        {tieneDescuento && (
-          <span className="absolute top-3 left-3 bg-accent text-white text-xs font-bold px-2.5 py-1 rounded-md">
-            -{Math.round(producto.descuento)}%
-          </span>
-        )}
-        {producto.stock === 0 && (
-          <span className="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-md">
-            Agotado
-          </span>
-        )}
-      </Link>
+    <article className="group flex flex-col h-full gap-1 p-2 bg-white rounded-md transition-shadow hover:shadow-floating">
+      <div className="relative aspect-[264/248] rounded-sm overflow-hidden bg-aire">
+        <Link to={`/producto/${producto.id}`} tabIndex={-1} aria-hidden="true">
+          <ProductImage
+            src={producto.imagenUrl}
+            alt=""
+            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+              agotado ? 'opacity-50 grayscale' : ''
+            }`}
+          />
+        </Link>
+        <div className="absolute inset-x-3 top-3 flex items-start justify-between pointer-events-none">
+          {agotado ? (
+            <Badge tipo="agotado">Agotado</Badge>
+          ) : tieneDescuento ? (
+            <Badge tipo="descuento">-{Math.round(producto.descuento)}%</Badge>
+          ) : (
+            <span />
+          )}
+          <button
+            type="button"
+            className={`pointer-events-auto flex items-center justify-center size-8 rounded-pill border border-borde transition-colors ${
+              favorito ? 'bg-bosque text-lima border-bosque' : 'bg-white text-bosque hover:bg-menta'
+            }`}
+            aria-label={favorito ? `Quitar ${producto.nombre} de favoritos` : `Agregar ${producto.nombre} a favoritos`}
+            aria-pressed={favorito}
+            onClick={() => setFavorito((f) => !f)}
+          >
+            <Icon name="heart" size={16} />
+          </button>
+        </div>
+      </div>
 
-      <div className="flex flex-col flex-grow p-5">
-        <p className="text-xs uppercase tracking-wide text-gray-500 font-semibold mb-1">
-          {producto.categoria?.nombre || 'Producto'}
-        </p>
-        <Link to={`/producto/${producto.id}`}>
-          <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 hover:text-accent transition-colors">
-            {producto.nombre}
-          </h3>
+      <div className="flex flex-col flex-grow gap-1 p-3">
+        <p className="text-overline font-bold uppercase text-musgo">{producto.categoria?.nombre || 'Producto'}</p>
+        <Link to={`/producto/${producto.id}`} className="text-body-strong font-bold line-clamp-2 hover:text-esmeralda transition-colors">
+          {producto.nombre}
         </Link>
 
-        {producto.rating > 0 && (
-          <div className="mb-3">
-            <Rating value={producto.rating} reviews={producto.resenas} />
-          </div>
-        )}
+        {producto.rating > 0 && <Rating value={producto.rating} reviews={producto.resenas} />}
 
         {producto.stock > 0 && producto.stock < 5 && (
-          <p className="text-amber-700 font-medium text-xs mb-3">¡Últimas {producto.stock} unidades!</p>
+          <Badge tipo="pocas-unidades">Últimas {producto.stock} unidades</Badge>
         )}
 
-        <div className="flex items-end justify-between gap-3 mt-auto pt-3 border-t border-gray-200 min-h-[4.25rem]">
-          <div>
-            {tieneDescuento ? (
-              <>
-                <span className="block text-xl font-bold text-accent">
-                  {formatearPrecio(precioFinal)}
-                </span>
-                <span className="block text-sm line-through text-gray-400">
-                  {formatearPrecio(producto.precio)}
-                </span>
-              </>
-            ) : (
-              <span className="text-xl font-bold text-gray-900">{formatearPrecio(producto.precio)}</span>
+        <div className="flex flex-wrap items-end justify-between gap-2 mt-auto pt-2">
+          <div className="min-w-0">
+            <p className="font-price font-extrabold text-[17px] leading-[1.2] tracking-[-0.3px] sm:text-price">
+              {formatearPrecio(tieneDescuento ? precioFinal : producto.precio)}
+            </p>
+            {tieneDescuento && (
+              <p className="text-price-old text-musgo line-through">{formatearPrecio(producto.precio)}</p>
             )}
           </div>
           <button
-            className={`text-sm py-2 px-4 ${added ? 'btn bg-success text-white' : 'btn-primary'}`}
-            disabled={producto.stock === 0 || adding}
+            type="button"
+            className={`ml-auto flex items-center justify-center size-10 shrink-0 rounded-pill text-white transition-colors disabled:bg-borde disabled:text-musgo disabled:cursor-not-allowed ${
+              added ? 'bg-esmeralda-oscuro' : 'bg-esmeralda hover:bg-esmeralda-oscuro'
+            }`}
+            disabled={agotado || adding}
             onClick={handleAddToCart}
+            aria-label={added ? `${producto.nombre} agregado al carrito` : `Agregar ${producto.nombre} al carrito`}
             aria-live="polite"
           >
-            {added ? (
-              <>
-                <CheckIcon className="w-4 h-4" /> Agregado
-              </>
-            ) : adding ? (
-              'Agregando…'
-            ) : (
-              'Agregar'
-            )}
+            <Icon name={added ? 'check' : 'plus'} size={18} />
           </button>
         </div>
-
       </div>
     </article>
   );

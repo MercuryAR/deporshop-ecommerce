@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@800;900&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -42,7 +42,7 @@ html {
 }
 
 body {
-  @apply font-sans text-gray-900 bg-white antialiased;
+  @apply font-sans text-body text-bosque bg-aire antialiased;
 }
 
 img {
@@ -50,36 +50,41 @@ img {
 }
 
 :focus-visible {
-  @apply outline outline-2 outline-accent outline-offset-2;
+  @apply outline outline-2 outline-esmeralda outline-offset-2;
 }
 
 @layer components {
+  /* Botón · Variante × Tamaño. M es el tamaño por defecto; .btn-lg y .btn-sm lo cambian. */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap select-none disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-[14px] rounded-pill text-label font-bold transition-colors duration-200 cursor-pointer whitespace-nowrap select-none disabled:cursor-not-allowed;
+  }
+
+  .btn-lg {
+    @apply px-7 py-[18px];
+  }
+
+  .btn-sm {
+    @apply gap-1.5 px-4 py-[9px] text-label-sm font-semibold;
   }
 
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary-light;
+    @apply btn bg-esmeralda text-white hover:bg-esmeralda-oscuro disabled:bg-borde disabled:text-musgo;
   }
 
-  .btn-accent {
-    @apply btn bg-accent text-white hover:bg-orange-700;
+  .btn-lima {
+    @apply btn bg-lima text-bosque hover:bg-lima-oscuro disabled:bg-borde disabled:text-musgo;
   }
 
-  .btn-outline {
-    @apply btn bg-transparent text-primary border border-gray-300 hover:border-primary hover:bg-gray-50;
+  .btn-dark {
+    @apply btn bg-bosque text-white hover:bg-esmeralda-oscuro disabled:bg-borde disabled:text-musgo;
   }
 
   .btn-secondary {
-    @apply btn bg-gray-50 text-gray-900 border border-gray-200 hover:bg-gray-200;
+    @apply btn border-[1.5px] border-bosque text-bosque hover:bg-menta disabled:border-borde disabled:text-musgo disabled:bg-transparent;
   }
 
-  .btn-ghost {
-    @apply btn bg-transparent text-primary px-4 py-2 hover:bg-gray-100;
-  }
-
-  .btn-error {
-    @apply btn bg-error text-white hover:bg-red-600;
+  .btn-text {
+    @apply btn text-esmeralda hover:bg-menta hover:text-esmeralda-oscuro disabled:text-musgo disabled:bg-transparent;
   }
 
   .btn-loading-bar {
@@ -87,21 +92,70 @@ img {
     animation: loadingSweep 1.1s ease-in-out infinite;
   }
 
+  /* Icon Button: circular, solo ícono (siempre con aria-label). */
+  .icon-btn {
+    @apply relative inline-flex items-center justify-center shrink-0 size-10 rounded-pill bg-white border border-borde text-bosque transition-colors hover:bg-menta;
+  }
+
   .container-app {
-    @apply w-full max-w-[1400px] mx-auto px-4;
+    @apply w-full max-w-content mx-auto px-4 sm:px-6;
   }
 
   .card {
-    @apply bg-white border border-gray-200 rounded-lg p-6 shadow-sm transition-all hover:shadow-md;
+    @apply bg-white border border-borde rounded-md;
+  }
+
+  .section-overline {
+    @apply text-overline font-bold uppercase text-esmeralda;
   }
 
   .form-input,
   .form-select,
   .form-textarea {
-    @apply w-full px-4 py-2.5 text-base font-sans border border-gray-200 rounded-lg bg-white text-gray-900 transition-all outline-none focus:border-info focus:ring-2 focus:ring-info/20;
+    @apply w-full h-12 px-4 text-body font-sans bg-white text-bosque border border-borde rounded-sm outline-none transition-shadow placeholder:text-musgo focus:border-2 focus:border-esmeralda focus:px-[15px] focus:shadow-focus disabled:bg-aire disabled:opacity-60;
+  }
+
+  .form-textarea {
+    @apply h-[140px] py-3 focus:py-[11px] resize-y;
+  }
+
+  .form-select {
+    @apply appearance-none pr-11 focus:pr-11 bg-no-repeat cursor-pointer;
+    background-image: url('./assets/icons/chevron-down.svg');
+    background-position: right 16px center;
+    background-size: 20px 20px;
+  }
+
+  .form-input-error {
+    @apply border-2 border-error px-[15px] focus:border-error focus:shadow-none;
   }
 
   .form-label {
-    @apply block mb-2 font-semibold text-gray-900;
+    @apply block mb-2 text-label-sm font-semibold text-bosque;
+  }
+
+  .form-help {
+    @apply mt-2 text-caption text-musgo;
+  }
+
+  .form-error {
+    @apply mt-2 text-caption text-error;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-4 py-[9px] rounded-pill text-label-sm font-semibold border border-borde bg-white text-bosque transition-colors hover:bg-menta;
+  }
+
+  .chip-active {
+    @apply chip bg-bosque border-bosque text-lima hover:bg-bosque;
+  }
+
+  .checkbox {
+    @apply appearance-none size-5 shrink-0 rounded-[6px] border-[1.5px] border-borde bg-white bg-center bg-no-repeat cursor-pointer transition-colors checked:bg-esmeralda checked:border-esmeralda;
+    background-size: 14px 14px;
+  }
+
+  .checkbox:checked {
+    background-image: url('./assets/ui/check-blanco.svg');
   }
 }

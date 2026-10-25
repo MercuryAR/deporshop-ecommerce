@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { getMisPedidos, formatearPrecio } from '../services/api';
+import { getMisPedidos } from '../services/api';
 import type { Pedido } from '../types/Pedido';
+import OrderCard from '../components/OrderCard';
+import Icon from '../components/Icons';
 
 export default function User() {
   const user = useAuthStore((s) => s.user);
@@ -40,92 +42,54 @@ export default function User() {
     navigate('/');
   }
 
-  function formatearFecha(fecha: string): string {
-    return new Date(fecha).toLocaleDateString('es-AR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  }
-
   return (
-    <div className="container-app py-16 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Mi perfil</h1>
+    <div className="container-app py-10 md:py-14 max-w-3xl">
+      <p className="section-overline mb-3">Mi cuenta</p>
+      <h1 className="font-display text-[36px] leading-[1.05] tracking-[-0.5px] sm:text-h1 mb-8">MI PERFIL</h1>
 
-      <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-gray-50 rounded-xl p-6 mb-8">
-        <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-white text-3xl font-bold">
+      <div className="card p-6 flex flex-col sm:flex-row gap-5 sm:items-center mb-8">
+        <div className="size-16 sm:size-20 rounded-pill bg-esmeralda flex items-center justify-center shrink-0 text-white font-display text-h2">
           {user?.nombre?.charAt(0).toUpperCase() ?? '?'}
         </div>
-        <div className="text-center sm:text-left">
-          <p className="mb-2">
-            <strong className="inline-block min-w-[110px] text-gray-500">Nombre:</strong>{' '}
-            {user?.nombre ?? '—'}
-          </p>
-          <p className="mb-2">
-            <strong className="inline-block min-w-[110px] text-gray-500">Email:</strong>{' '}
-            {user?.email ?? '—'}
-          </p>
+        <div className="flex-1 min-w-0">
+          <p className="text-h4 font-bold truncate">{user?.nombre ?? '—'}</p>
+          <p className="text-body-sm text-musgo truncate">{user?.email ?? '—'}</p>
         </div>
+        <button type="button" className="btn-secondary btn-sm self-start sm:self-center" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
       </div>
 
       {pedidoConfirmado && (
-        <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl p-4 mb-8">
-          ¡Pedido #{pedidoConfirmado} confirmado! Gracias por tu compra.
+        <div className="flex items-center gap-3 bg-menta text-esmeralda-oscuro rounded-md p-4 mb-8" role="status">
+          <span className="flex items-center justify-center size-8 rounded-pill bg-esmeralda text-white shrink-0">
+            <Icon name="check" size={16} />
+          </span>
+          <p className="text-body-sm font-semibold">¡Pedido #{pedidoConfirmado} confirmado! Gracias por tu compra.</p>
         </div>
       )}
 
-      <h2 className="text-xl font-bold mb-4">Mis pedidos</h2>
+      <h2 className="text-h3 font-extrabold mb-4">Mis pedidos</h2>
 
-      {loading && <p className="text-gray-500 mb-8">Cargando pedidos...</p>}
+      {loading && <p className="text-musgo mb-8">Cargando pedidos...</p>}
 
-      {!loading && error && <p className="text-red-600 mb-8">{error}</p>}
+      {!loading && error && <p className="text-body-sm text-error bg-error-suave rounded-sm px-4 py-3 mb-8">{error}</p>}
 
       {!loading && !error && pedidos.length === 0 && (
-        <div className="flex items-center justify-center min-h-[200px] border-2 border-dashed border-gray-200 rounded-xl text-center p-8 mb-8">
-          <div>
-            <p className="text-gray-500 mb-2">Aún no tienes pedidos.</p>
-            <p className="text-sm text-gray-400">Tu historial de compras aparecerá aquí.</p>
-          </div>
+        <div className="flex flex-col items-center justify-center min-h-[200px] border-2 border-dashed border-borde rounded-md text-center p-8">
+          <Icon name="bag" size={32} className="text-musgo mb-3" />
+          <p className="text-body-strong font-bold mb-1">Aún no tenés pedidos.</p>
+          <p className="text-body-sm text-musgo">Tu historial de compras aparecerá acá.</p>
         </div>
       )}
 
       {!loading && !error && pedidos.length > 0 && (
-        <div className="flex flex-col gap-4 mb-8">
+        <div className="flex flex-col gap-4">
           {pedidos.map((pedido) => (
-            <div key={pedido.id} className="border border-gray-200 rounded-xl p-5">
-              <div className="flex justify-between items-start mb-3">
-                <div>
-                  <p className="font-semibold">Pedido #{pedido.id}</p>
-                  <p className="text-sm text-gray-500">{formatearFecha(pedido.fecha)}</p>
-                </div>
-                <span className="text-xs font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
-                  {pedido.estado}
-                </span>
-              </div>
-              <div className="flex flex-col gap-1 mb-3">
-                {pedido.items.map((item) => (
-                  <div key={item.productoId} className="flex justify-between text-sm text-gray-700">
-                    <span>
-                      {item.nombre} x{item.cantidad}
-                    </span>
-                    <span>{formatearPrecio(item.subtotal)}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-between font-bold pt-3 border-t border-gray-100">
-                <span>Total</span>
-                <span>{formatearPrecio(pedido.total)}</span>
-              </div>
-            </div>
+            <OrderCard key={pedido.id} pedido={pedido} />
           ))}
         </div>
       )}
-
-      <button className="btn-outline" onClick={handleLogout}>
-        Cerrar sesión
-      </button>
     </div>
   );
 }

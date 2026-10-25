@@ -2,6 +2,8 @@
 
 Tienda de zapatillas y accesorios deportivos. Proyecto full-stack con backend REST en Spring Boot (Java) y frontend en React + TypeScript, construido como portfolio.
 
+La interfaz tiene un **rediseño UX/UI propio**: primero diseñé un design system completo en Figma y después lo implementé en el frontend, responsivo para mobile, tablet y desktop (ver [Diseño UX/UI](#diseño-uxui)).
+
 **Demo en vivo:** [deporshop-frontend.onrender.com](https://deporshop-frontend.onrender.com) · API: [deporshop-api.onrender.com](https://deporshop-api.onrender.com) · [Swagger](https://deporshop-api.onrender.com/swagger-ui/index.html)
 
 > El backend está en el free tier de Render: si nadie lo usó en un rato, el primer request puede tardar ~50 segundos en despertar. Además, la base es H2 en memoria — cada vez que el servicio se redeploya, se borran todos los usuarios y pedidos (ver [Datos de ejemplo](#datos-de-ejemplo)).
@@ -23,6 +25,35 @@ Tienda de zapatillas y accesorios deportivos. Proyecto full-stack con backend RE
 - Zustand (estado global: productos, carrito, autenticación)
 - React Router
 - Axios
+
+**Diseño UX/UI**
+- Figma (design system, UI kit y patrones de pantalla)
+
+## Diseño UX/UI
+
+El frontend se rediseñó a partir de un design system propio hecho en Figma: [DeporShop · Design System & UI Kit](https://www.figma.com/design/Ibv9Mpnu3sfmkWkLti7Lvr/Deporshop?node-id=14-2).
+
+El design system define:
+
+- **Identidad:** logo con isotipo de pulso y wordmark en Archivo Black, en cuatro versiones (color, invertido, mono Bosque y mono Blanco).
+- **Color:** verde como identidad. Bosque `#0B2318` para texto y fondos oscuros, Esmeralda `#0E7A4F` para la acción principal y Lima `#C8F05A` para ofertas y CTAs sobre oscuro, más neutros (Musgo, Borde, Menta, Aire) y estados (error y aviso). Las combinaciones de texto y fondo cumplen contraste AA/AAA.
+- **Tipografía:** Archivo Black para títulos, Archivo para precios y Manrope para la interfaz, con una escala nombrada (Display, H1–H4, Body, Label, Price).
+- **Espaciado, radios y elevación:** base de 4px, radios de 10 a 32px y botones tipo pill.
+- **Iconografía:** set propio de 21 íconos de trazo 2px sobre grilla de 24px.
+- **UI kit:** botones (5 variantes × 3 tamaños × estados), badges, chips, selector de talle, campos de formulario, buscador, selector de cantidad, checkbox, rating, product card, category card, benefit card, order card y line item.
+- **Patrones de pantalla:** header con barra de anuncio, ítem de carrito, banner promocional y footer.
+
+**Implementación en el código:**
+
+- Los tokens del Figma (colores, tipografías, radios y sombras) están en [`front/tailwind.config.js`](front/tailwind.config.js) con los mismos nombres que las variables de Figma.
+- Cada componente del UI kit tiene su equivalente en `front/src/components/`.
+- Los íconos y gráficos se exportaron de Figma a `front/src/assets/` sin modificarlos. Se renderizan como máscara CSS para que tomen cualquier color de la paleta.
+- **Responsive:**
+  - Mobile (desde 375px): menú desplegable, buscador en su propia fila y grilla de productos de 2 columnas.
+  - Tablet (desde 768px): buscador en el header y layouts de 2 columnas.
+  - Desktop (desde 1280px): navegación completa en el header y grillas de 3 a 4 columnas.
+
+> El diseño UX/UI y la identidad visual de DeporShop **no** están bajo la licencia MIT del código (ver [Licencia](#licencia)).
 
 ## Estructura del proyecto
 
@@ -96,6 +127,7 @@ Los dos servicios corren en **Render**, definidos como Blueprint en [`render.yam
 - Checkout con creación real de pedidos — el precio se recalcula en el servidor a partir del producto real, nunca se confía en lo que manda el cliente
 - Historial de pedidos en el perfil de usuario
 - Formulario de contacto con validación
+- Interfaz responsiva (mobile, tablet y desktop) basada en un design system propio
 - Documentación interactiva de la API vía Swagger
 
 ## Datos de ejemplo
@@ -111,4 +143,9 @@ Al iniciar, el backend carga automáticamente 3 categorías y 6 productos de eje
 
 ## Licencia
 
-Proyecto educativo/portfolio. Libre para uso y modificación.
+Este repositorio tiene dos licencias (detalle completo en [LICENSE](LICENSE)):
+
+- **Código fuente:** [licencia MIT](LICENSE). Podés usarlo, copiarlo y modificarlo libremente, manteniendo el aviso de copyright.
+- **Diseño UX/UI e identidad visual:** © 2026 Paulo Orsini, todos los derechos reservados. Incluye el nombre y logo de DeporShop, el design system de Figma, la paleta, la iconografía y los gráficos de `front/src/assets/`. No se pueden reutilizar en otros proyectos sin autorización. Si reutilizás el código, reemplazá el diseño por uno propio.
+
+Las fotos de producto, las tipografías (Google Fonts, SIL OFL) y las dependencias conservan sus propias licencias.

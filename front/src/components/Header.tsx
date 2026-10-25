@@ -1,88 +1,122 @@
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { useCartStore } from '../store/cartStore';
+import { Link, useLocation } from 'react-router-dom';
+import { useCartStore, ENVIO_GRATIS_DESDE } from '../store/cartStore';
 import { useAuthStore } from '../store/authStore';
-import { CartIcon, CloseIcon, MenuIcon, UserIcon } from './Icons';
-
-const NAV_LINKS = [
-  { to: '/', label: 'Inicio', end: true },
-  { to: '/productos', label: 'Productos' },
-  { to: '/contacto', label: 'Contacto' },
-];
+import { useProductStore } from '../store/productStore';
+import { formatearPrecio } from '../services/api';
+import Logo from './Logo';
+import SearchBar from './SearchBar';
+import Icon from './Icons';
 
 export default function Header() {
   const cantidad = useCartStore((s) => s.cantidad);
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const categorias = useProductStore((s) => s.categorias);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
 
-  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `px-4 py-2 rounded-lg font-medium transition-colors ${
-      isActive ? 'bg-white/15 text-white' : 'text-white/75 hover:text-white hover:bg-white/10'
-    }`;
+  const links = [
+    { to: '/productos', label: 'Productos', active: location.pathname === '/productos' && !params.toString() },
+    ...categorias.map((c) => ({
+      to: `/productos?categoriaId=${c.id}`,
+      label: c.nombre,
+      active: params.get('categoriaId') === String(c.id),
+    })),
+    { to: '/productos?descuento=1', label: 'Ofertas', active: params.get('descuento') === '1', destacado: true },
+    { to: '/contacto', label: 'Contacto', active: location.pathname === '/contacto' },
+  ];
 
-  const iconButton =
-    'relative w-10 h-10 flex items-center justify-center rounded-lg text-white hover:bg-white/15 transition-colors';
+  const cuenta = isAuthenticated
+    ? { to: '/perfil', label: 'Mi perfil', active: location.pathname === '/perfil' }
+    : { to: '/login', label: 'Iniciar sesión', active: location.pathname === '/login' };
+
+  const linkClass = (active: boolean, destacado?: boolean) =>
+    `text-label-sm font-semibold whitespace-nowrap transition-colors hover:text-esmeralda ${
+      destacado || active ? 'text-esmeralda' : 'text-bosque'
+    } ${active ? 'underline underline-offset-[6px] decoration-2' : ''}`;
+
+  const close = () => setMenuOpen(false);
 
   return (
-    <header className="bg-primary text-white sticky top-0 z-50 border-b border-white/10">
-      <div className="container-app flex items-center justify-between gap-4 h-16">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-          <svg viewBox="0 0 32 32" className="w-8 h-8" aria-hidden="true">
-            <rect width="32" height="32" rx="8" className="fill-accent" />
-            <path d="M8 21 L14 11 L18 17 L21 13 L25 21" stroke="white" strokeWidth="2.5" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-          </svg>
-          <span className="font-display italic text-2xl font-extrabold uppercase tracking-wide">
-            Depor<span className="text-accent">Shop</span>
-          </span>
-        </Link>
+    <header className="sticky top-0 z-50 bg-white">
+      <div className="bg-bosque text-menta text-caption text-center px-4 py-2">
+        Envío gratis en compras desde <span className="text-lima">{formatearPrecio(ENVIO_GRATIS_DESDE)}</span>
+        <span className="hidden sm:inline"> · Cambios sin cargo por 30 días</span>
+      </div>
 
-        <nav className="hidden md:flex gap-1" aria-label="Navegación principal">
-          {NAV_LINKS.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.end} className={navLinkClass}>
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-1">
-          <Link
-            to={isAuthenticated ? '/perfil' : '/login'}
-            aria-label={isAuthenticated ? 'Mi perfil' : 'Iniciar sesión'}
-            className={iconButton}
-          >
-            <UserIcon />
+      <div className="border-b border-borde">
+        <div className="container-app flex items-center gap-3 sm:gap-4 xl:gap-8 py-3 md:py-[14px]">
+          <Link to="/" onClick={close} aria-label="DeporShop, ir al inicio" className="shrink-0">
+            <Logo />
           </Link>
-          <Link
-            to="/carrito"
-            aria-label={`Carrito de compras${cantidad > 0 ? `, ${cantidad} productos` : ''}`}
-            className={iconButton}
-          >
-            <CartIcon />
-            {cantidad > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-accent text-white text-[11px] font-bold min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1 ring-2 ring-primary">
+
+          <nav className="hidden xl:flex flex-1 items-center gap-6 min-w-0" aria-label="Navegación principal">
+            {links.map((l) => (
+              <Link key={l.to} to={l.to} aria-current={l.active ? 'page' : undefined} className={linkClass(l.active, l.destacado)}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          <SearchBar className="hidden md:block flex-1 max-w-[480px] ml-auto xl:ml-0 xl:flex-none xl:w-[280px] 2xl:w-[320px]" />
+
+          <div className="flex items-center gap-2 sm:gap-3 ml-auto md:ml-0 shrink-0">
+            <Link to={cuenta.to} onClick={close} aria-label={cuenta.label} className="icon-btn hidden sm:inline-flex">
+              <Icon name="user" size={18} />
+            </Link>
+            <Link
+              to="/carrito"
+              onClick={close}
+              aria-label={`Carrito de compras, ${cantidad} producto${cantidad === 1 ? '' : 's'}`}
+              className="flex items-center gap-2 pl-3 sm:pl-4 pr-1.5 py-1.5 rounded-pill bg-bosque text-white hover:bg-esmeralda-oscuro transition-colors"
+            >
+              <Icon name="bag" size={18} />
+              <span className="flex items-center justify-center min-w-7 h-7 px-1.5 rounded-pill bg-lima text-bosque text-label-sm font-semibold">
                 {cantidad}
               </span>
-            )}
-          </Link>
-          <button
-            className={`md:hidden ${iconButton}`}
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            aria-expanded={menuOpen}
-            aria-controls="menu-movil"
-            onClick={() => setMenuOpen((o) => !o)}
-          >
-            {menuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
+            </Link>
+            <button
+              type="button"
+              className="icon-btn xl:hidden"
+              aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={menuOpen}
+              aria-controls="menu-movil"
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              <Icon name={menuOpen ? 'x' : 'menu'} size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div className="container-app md:hidden pb-3">
+          <SearchBar onSearch={close} />
         </div>
       </div>
 
       {menuOpen && (
-        <nav id="menu-movil" className="md:hidden flex flex-col gap-1 px-4 pb-4 border-t border-white/10 pt-3" aria-label="Navegación móvil">
-          {NAV_LINKS.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.end} className={navLinkClass} onClick={() => setMenuOpen(false)}>
-              {l.label}
-            </NavLink>
-          ))}
+        <nav
+          id="menu-movil"
+          className="xl:hidden absolute inset-x-0 top-full bg-white border-b border-borde shadow-floating"
+          aria-label="Navegación móvil"
+        >
+          <ul className="container-app flex flex-col py-2">
+            {[...links, { ...cuenta, destacado: false, mobileOnly: true }].map((l) => (
+              <li key={l.to} className={'mobileOnly' in l ? 'sm:hidden' : ''}>
+                <Link
+                  to={l.to}
+                  onClick={close}
+                  aria-current={l.active ? 'page' : undefined}
+                  className={`flex items-center justify-between py-3.5 border-b border-borde last:border-0 text-body-strong font-bold ${
+                    l.destacado || l.active ? 'text-esmeralda' : 'text-bosque'
+                  }`}
+                >
+                  {l.label}
+                  <Icon name="arrow-right" size={18} />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
       )}
     </header>

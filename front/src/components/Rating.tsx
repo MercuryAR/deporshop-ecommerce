@@ -1,4 +1,4 @@
-import { StarIcon } from './Icons';
+import starFilled from '../assets/icons/star-filled.svg';
 
 interface RatingProps {
   value: number;
@@ -6,23 +6,16 @@ interface RatingProps {
   size?: 'sm' | 'md';
 }
 
+// Rating del UI kit: estrella Esmeralda + "4.5 · 42 reseñas".
 export default function Rating({ value, reviews, size = 'sm' }: RatingProps) {
-  const rounded = Math.round(value);
-  const star = size === 'sm' ? 'w-4 h-4' : 'w-5 h-5';
-
+  const star = size === 'sm' ? 14 : 18;
   return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex text-amber-400" role="img" aria-label={`${value.toFixed(1)} de 5 estrellas`}>
-        {Array.from({ length: 5 }, (_, i) => (
-          <StarIcon key={i} filled={i < rounded} className={star} />
-        ))}
-      </div>
-      {reviews !== undefined && (
-        <span className={`text-gray-500 ${size === 'sm' ? 'text-xs' : 'text-sm'}`}>
-          ({reviews}
-          {size === 'md' ? ' reseñas' : ''})
-        </span>
-      )}
+    <div className="flex items-center gap-1.5" aria-label={`${value.toFixed(1)} de 5 estrellas`}>
+      <img src={starFilled} alt="" width={star} height={star} className="shrink-0" />
+      <span className={`text-musgo ${size === 'sm' ? 'text-caption' : 'text-body-sm'}`}>
+        {value.toFixed(1)}
+        {reviews !== undefined && ` · ${reviews} reseña${reviews === 1 ? '' : 's'}`}
+      </span>
     </div>
   );
 }

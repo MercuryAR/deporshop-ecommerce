@@ -7,24 +7,26 @@ export default function Products() {
   const [searchParams] = useSearchParams();
   const setFiltro = useProductStore((s) => s.setFiltro);
 
+  // Los links del header/footer llevan los filtros en la URL; al navegar se aplican
+  // y los que no vienen vuelven a su valor por defecto.
   useEffect(() => {
     const categoriaId = searchParams.get('categoriaId');
-    const buscar = searchParams.get('buscar');
-    if (categoriaId) setFiltro('categoriaId', Number(categoriaId));
-    if (buscar) setFiltro('buscar', buscar);
-    if (searchParams.get('descuento') === '1') setFiltro('soloConDescuento', true);
+    setFiltro('categoriaId', categoriaId ? Number(categoriaId) : 'all');
+    setFiltro('buscar', searchParams.get('buscar') ?? '');
+    setFiltro('soloConDescuento', searchParams.get('descuento') === '1');
   }, [searchParams, setFiltro]);
 
   return (
     <div>
-      <section className="container-app pt-10 pb-6">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">Productos</h1>
-        <p className="text-gray-500 max-w-xl">
-          Descubre nuestra colección completa de zapatillas y accesorios deportivos
+      <section className="container-app pt-10 md:pt-14 pb-6">
+        <p className="section-overline mb-3">Tienda</p>
+        <h1 className="font-display text-[36px] leading-[1.05] tracking-[-0.5px] sm:text-h1 mb-3">PRODUCTOS</h1>
+        <p className="text-body text-musgo max-w-xl">
+          Descubrí nuestra colección completa de zapatillas, ropa y accesorios deportivos.
         </p>
       </section>
 
-      <section className="container-app pb-16">
+      <section className="container-app">
         <ProductList />
       </section>
     </div>

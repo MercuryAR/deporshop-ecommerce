@@ -1,0 +1,77 @@
+Este repositorio tiene dos licencias distintas:
+
+  1. El CÓDIGO FUENTE se distribuye bajo la licencia MIT (Parte 1).
+  2. El DISEÑO UX/UI y la IDENTIDAD VISUAL de DeporShop NO están cubiertos
+     por la licencia MIT: todos los derechos reservados (Parte 2).
+
+================================================================================
+PARTE 1 — CÓDIGO FUENTE: Licencia MIT
+================================================================================
+
+MIT License
+
+Copyright (c) 2026 Paulo Orsini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+The term "Software" above refers only to the source code of this repository
+(Java, TypeScript, JavaScript, CSS and configuration files) and excludes the
+Design described in Part 2.
+
+================================================================================
+PARTE 2 — DISEÑO UX/UI E IDENTIDAD VISUAL: Todos los derechos reservados
+================================================================================
+
+Copyright (c) 2026 Paulo Orsini. Todos los derechos reservados.
+
+Se considera "Diseño" a:
+
+  - El nombre y la marca "DeporShop", el logo, el isotipo de pulso y el wordmark.
+  - El design system "Design System & UI Kit" de DeporShop creado en Figma:
+    paleta de colores, escala tipográfica, espaciado, iconografía, componentes
+    del UI kit y patrones de pantalla.
+  - Los archivos gráficos de front/src/assets/ (íconos, ilustraciones y
+    elementos decorativos exportados de ese design system).
+  - La composición visual de las pantallas de la aplicación, en la medida en
+    que reproduzca la identidad visual descripta arriba.
+
+El Diseño se publica únicamente para que este proyecto pueda verse, ejecutarse
+y evaluarse como portfolio. No se concede ningún permiso para copiar,
+reproducir, modificar, distribuir ni usar el Diseño —total o parcialmente,
+con o sin fines comerciales— en otros proyectos, productos o servicios sin
+autorización previa y por escrito del titular.
+
+Quien reutilice el código bajo la Parte 1 debe reemplazar el Diseño por uno
+propio (nombre, logo, colores, íconos e ilustraciones).
+
+Para pedir autorización: pauloeorsini@gmail.com
+
+================================================================================
+MATERIAL DE TERCEROS
+================================================================================
+
+Este repositorio incluye o referencia material de terceros que conserva sus
+propias licencias y no queda cubierto por ninguna de las partes anteriores:
+
+  - Tipografías Archivo, Archivo Black y Manrope (Google Fonts, SIL Open Font
+    License 1.1), cargadas desde Google Fonts.
+  - Fotos de producto en front/public/img/ y los íconos de redes sociales de
+    esa carpeta: pertenecen a sus respectivos autores y se usan solo como
+    contenido de demostración.
+  - Las dependencias de npm y Maven, cada una bajo su propia licencia.

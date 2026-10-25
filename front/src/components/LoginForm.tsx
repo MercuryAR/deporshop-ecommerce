@@ -33,30 +33,23 @@ export default function LoginForm() {
     }
   }
 
+  const tabClass = (activo: boolean) =>
+    `flex-1 px-3 sm:px-6 py-3 rounded-pill text-label font-bold whitespace-nowrap transition-colors ${
+      activo ? 'bg-white text-bosque shadow-card' : 'text-musgo hover:text-bosque'
+    }`;
+
   return (
-    <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-black/5">
-      <div className="flex mb-6 rounded-lg bg-gray-100 p-1">
-        <button
-          type="button"
-          className={`flex-1 py-2 rounded-md font-semibold transition-colors ${
-            mode === 'login' ? 'bg-white shadow-sm text-primary' : 'text-gray-500'
-          }`}
-          onClick={() => setMode('login')}
-        >
+    <div className="w-full max-w-md mx-auto card p-6 sm:p-8 shadow-card">
+      <div className="flex mb-8 rounded-pill bg-menta p-1" role="tablist" aria-label="Acceso">
+        <button type="button" role="tab" aria-selected={mode === 'login'} className={tabClass(mode === 'login')} onClick={() => setMode('login')}>
           Iniciar sesión
         </button>
-        <button
-          type="button"
-          className={`flex-1 py-2 rounded-md font-semibold transition-colors ${
-            mode === 'register' ? 'bg-white shadow-sm text-primary' : 'text-gray-500'
-          }`}
-          onClick={() => setMode('register')}
-        >
+        <button type="button" role="tab" aria-selected={mode === 'register'} className={tabClass(mode === 'register')} onClick={() => setMode('register')}>
           Crear cuenta
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {mode === 'register' && (
           <div>
             <label htmlFor="nombre" className="form-label">
@@ -102,12 +95,16 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
+            aria-describedby="password-ayuda"
           />
+          <p id="password-ayuda" className="form-help">
+            Mínimo 6 caracteres
+          </p>
         </div>
 
-        {submitError && <p className="text-error text-sm font-medium">{submitError}</p>}
+        {submitError && <p className="text-body-sm text-error bg-error-suave rounded-sm px-4 py-3">{submitError}</p>}
 
-        <button type="submit" className="btn-accent w-full mt-2" disabled={loading}>
+        <button type="submit" className="btn-primary btn-lg w-full mt-1" disabled={loading}>
           {loading ? 'Enviando…' : mode === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}
         </button>
       </form>

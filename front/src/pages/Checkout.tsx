@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
 import { crearPedido, formatearPrecio } from '../services/api';
+import LineItem from '../components/LineItem';
 
 export default function Checkout() {
   const { items, clear, getSubtotal, getEnvio, getTotalConEnvio } = useCartStore();
@@ -28,7 +29,7 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <div className="container-app py-24 text-center">
-        <p className="text-lg text-gray-500 mb-6">No hay productos en tu carrito para pagar.</p>
+        <p className="text-body-lg text-musgo mb-6">No hay productos en tu carrito para pagar.</p>
         <Link to="/productos" className="btn-primary">
           Ver productos
         </Link>
@@ -37,41 +38,32 @@ export default function Checkout() {
   }
 
   return (
-    <div className="container-app py-10 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Resumen de compra</h1>
+    <div className="container-app py-10 md:py-14 max-w-2xl">
+      <p className="section-overline mb-3">Checkout</p>
+      <h1 className="font-display text-[32px] leading-[1.05] tracking-[-0.5px] sm:text-h1 mb-8">RESUMEN DE COMPRA</h1>
 
-      <div className="bg-white border border-gray-200 rounded-xl shadow-md p-6 mb-6">
-        <div className="flex flex-col gap-3 mb-6">
+      <div className="card p-6 mb-6 flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           {items.map((item) => (
-            <div key={item.productoId} className="flex justify-between text-gray-700">
-              <span>
-                {item.nombre} x{item.cantidad}
-              </span>
-              <span className="font-medium">{formatearPrecio(item.subtotal)}</span>
-            </div>
+            <LineItem key={item.productoId} concepto={`${item.nombre} x${item.cantidad}`} monto={formatearPrecio(item.subtotal)} />
           ))}
         </div>
 
-        <div className="flex flex-col gap-2 pt-4 border-t border-gray-200">
-          <div className="flex justify-between text-gray-700">
-            <span>Subtotal</span>
-            <span>{formatearPrecio(getSubtotal())}</span>
-          </div>
-          <div className="flex justify-between text-gray-700">
-            <span>Envío</span>
-            <span>{getEnvio() === 0 ? 'Gratis' : formatearPrecio(getEnvio())}</span>
-          </div>
-          <div className="flex justify-between text-xl font-bold pt-2 border-t-2 border-gray-200">
-            <span>Total</span>
-            <span>{formatearPrecio(getTotalConEnvio())}</span>
-          </div>
+        <div className="h-px bg-borde" />
+        <LineItem concepto="Subtotal" monto={formatearPrecio(getSubtotal())} />
+        <LineItem concepto="Envío" monto={getEnvio() === 0 ? 'Gratis' : formatearPrecio(getEnvio())} />
+        <div className="h-px bg-borde" />
+        <div className="flex items-center justify-between">
+          <span className="text-body-strong font-bold">Total</span>
+          <span className="font-price font-extrabold text-price-lg">{formatearPrecio(getTotalConEnvio())}</span>
         </div>
       </div>
 
-      {error && <p className="text-sm text-red-600 mb-4">{error}</p>}
+      {error && <p className="text-body-sm text-error bg-error-suave rounded-sm px-4 py-3 mb-4">{error}</p>}
 
       <button
-        className="btn-accent relative overflow-hidden w-full text-lg py-3 disabled:opacity-100 disabled:cursor-not-allowed"
+        type="button"
+        className="btn-primary btn-lg relative overflow-hidden w-full disabled:bg-esmeralda disabled:text-white"
         onClick={handleConfirmar}
         disabled={confirmando}
       >

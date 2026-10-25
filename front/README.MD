@@ -41,6 +41,9 @@ App en `http://localhost:5173`.
 src/
 ├── pages/          # Una por ruta: Home, Products, ProductDetail, Cart, Checkout, Login, User, Contact
 ├── components/     # Reutilizables: Header, Footer, Layout, ProductCard, ProductList, CartItem, LoginForm, Carousel, ProtectedRoute
+│                   # + UI kit del design system: Logo, Icons, Badge, Rating, QuantityStepper, SearchBar,
+│                   #   BenefitCard, CategoryCard, PromoBanner, LineItem, OrderCard
+├── assets/         # Íconos y gráficos exportados del design system de Figma
 ├── store/          # Zustand: productStore, cartStore, authStore
 ├── services/       # api.ts — instancia de axios + funciones tipadas por endpoint
 └── types/          # Interfaces TS que reflejan los DTOs del backend
@@ -71,7 +74,18 @@ Las rutas protegidas usan `components/ProtectedRoute.tsx`, que redirige a `/logi
 
 ## Estilos
 
-Tailwind CSS con la paleta de marca: gris `#1F2937` (primario) y naranja `#EA580C` (acento), tipografía Inter + Caveat (Google Fonts). Configuración en `tailwind.config.js` — cambiar el color ahí se propaga a todo el sitio vía las utilidades `accent`/`accent-light` de Tailwind.
+La interfaz implementa el design system de Figma [DeporShop · Design System & UI Kit](https://www.figma.com/design/Ibv9Mpnu3sfmkWkLti7Lvr/Deporshop?node-id=14-2). Más detalle en el [README raíz](../README.md#diseño-uxui).
+
+- **Tokens** en `tailwind.config.js`, con los nombres de las variables de Figma:
+  - Colores: `bosque`, `esmeralda`, `lima`, `musgo`, `borde`, `menta`, `aire`, `error` y `aviso`.
+  - Escala tipográfica: `text-display-xl` … `text-caption`, `text-price` y otras.
+  - Radios (`sm` a `xl` y `pill`) y sombras (`shadow-card`, `shadow-floating`).
+- **Tipografías:** Archivo Black (títulos), Archivo (precios) y Manrope (interfaz), cargadas desde Google Fonts en `src/index.css`.
+- **Clases de componentes** en `src/index.css`:
+  - Botones `btn-primary`, `btn-lima`, `btn-dark`, `btn-secondary` y `btn-text`, con tamaños `btn-sm` y `btn-lg`.
+  - Campos `form-input`, `form-select` y `form-textarea`, más `chip`, `checkbox` e `icon-btn`.
+- **Íconos:** `components/Icons.tsx` usa los SVG de `src/assets/icons/` como máscara CSS, así toman el color del texto (`<Icon name="bag" size={18} />`).
+- **Breakpoints:** mobile por defecto. `sm` (640px), `md` (768px, buscador en el header), `lg` (1024px) y `xl` (1280px, navegación completa).
 
 ## Notas
 
